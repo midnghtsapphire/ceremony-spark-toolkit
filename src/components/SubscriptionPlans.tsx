@@ -23,7 +23,7 @@ const plans = [
   {
     name: 'Premium',
     price: '$59',
-    priceId: 'price_1RLdqrP8T6VGDCG5premium',
+    priceId: 'price_1Raj4TP8T6VGDCG5erlZ8vtG',
     features: [
       'All Basic features',
       'Advanced AI customization',
