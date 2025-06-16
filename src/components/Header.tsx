@@ -24,7 +24,7 @@ const Header = ({ onAuthClick }: HeaderProps) => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700">
-              CeremonyPro
+              Officiantbot
             </Link>
             {subscribed && (
               <span className="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">

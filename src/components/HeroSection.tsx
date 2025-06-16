@@ -17,10 +17,10 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             Professional Wedding Officiant
-            <span className="text-blue-600"> Ceremony Toolkit</span>
+            <span className="text-blue-600"> AI Assistant</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            The complete marriage officiant platform with AI-powered wedding ceremony scripts, 
+            The complete AI-powered marriage officiant platform with intelligent wedding ceremony scripts, 
             legal marriage requirements, officiant certification, and professional wedding tools. 
             Perfect for ministers, celebrants, and wedding officiants.
           </p>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Heart, Mail, MessageSquare } from 'lucide-react';
 
@@ -13,13 +12,13 @@ const Footer = () => {
                 <Heart className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">CeremonyPro</h3>
-                <p className="text-gray-400 text-sm">Professional Wedding Officiant Toolkit</p>
+                <h3 className="text-xl font-bold">Officiantbot</h3>
+                <p className="text-gray-400 text-sm">AI-Powered Wedding Officiant Assistant</p>
               </div>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              Empowering professional officiants with expert tools, comprehensive legal guidance, and 
-              AI-powered ceremony scripts for exceptional wedding experiences.
+              Empowering professional officiants with AI-powered tools, comprehensive legal guidance, and 
+              intelligent ceremony scripts for exceptional wedding experiences.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -55,7 +54,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col md:flex-row items-center gap-4">
             <p className="text-gray-400 text-sm">
-              © 2024 CeremonyPro. All rights reserved.
+              © 2024 Officiantbot. All rights reserved.
             </p>
             <p className="text-gray-500 text-sm">
               Powered by <span className="text-blue-400 font-medium">Glowstar Labs</span>
