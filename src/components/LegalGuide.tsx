@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Scale, MapPin, FileText, AlertCircle, CheckCircle, Users } from 'lucide-react';
+import { Scale, MapPin, FileText, AlertCircle, CheckCircle, Users, ExternalLink } from 'lucide-react';
 import FormsLibrary from '@/components/FormsLibrary';
 
 interface LegalGuideProps {
@@ -13,48 +15,38 @@ interface LegalGuideProps {
 const LegalGuide = ({ userState }: LegalGuideProps) => {
   const [selectedState, setSelectedState] = useState(userState || '');
 
-  const stateRequirements = {
-    'california': {
-      ageRequirement: '18 years old (16-17 with parental consent)',
-      witnesses: '1 witness required',
-      waitingPeriod: 'None',
-      licenseValidity: '90 days',
-      officiantRequirements: 'Must be ordained or deputized',
-      filingDeadline: '10 days after ceremony',
-      specialNotes: 'California recognizes online ordination. Confidential marriage licenses available.',
-      forms: ['Marriage License Application', 'Certificate of Marriage', 'Officiant Registration']
-    },
-    'texas': {
-      ageRequirement: '18 years old (16-17 with court order)',
-      witnesses: '2 witnesses required',
-      waitingPeriod: '72 hours (can be waived)',
-      licenseValidity: '90 days',
-      officiantRequirements: 'Must be licensed by the state',
-      filingDeadline: '30 days after ceremony',
-      specialNotes: 'Informal marriage (common law) recognized. Premarital education can waive waiting period.',
-      forms: ['Marriage License', 'Declaration of Informal Marriage', 'Return of Marriage License']
-    },
-    'newyork': {
-      ageRequirement: '18 years old (16-17 with parental consent)',
-      witnesses: '1 witness required',
-      waitingPeriod: '24 hours (can be waived)',
-      licenseValidity: '60 days',
-      officiantRequirements: 'Must be registered with city clerk',
-      filingDeadline: '5 days after ceremony',
-      specialNotes: 'One-day marriage officiant permits available. Same-sex marriage legal.',
-      forms: ['Marriage License', 'Marriage Certificate', 'Officiant Registration']
-    }
-  };
-
   const states = [
-    { value: 'california', label: 'California' },
-    { value: 'texas', label: 'Texas' },
-    { value: 'newyork', label: 'New York' },
-    { value: 'florida', label: 'Florida' },
-    { value: 'illinois', label: 'Illinois' }
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
 
-  const currentRequirements = selectedState ? stateRequirements[selectedState] : null;
+  const getStateRequirements = (state: string) => {
+    // Mock data - in real app this would come from a database
+    const requirements = {
+      'California': {
+        age: '18 years old',
+        witnesses: '1 witness required',
+        waiting: 'No waiting period',
+        registration: 'Officiant must register with county',
+        special: 'Marriage license valid for 90 days'
+      },
+      'New York': {
+        age: '18 years old (16-17 with consent)',
+        witnesses: '1 witness required',
+        waiting: '24 hour waiting period',
+        registration: 'Officiant must register with city clerk',
+        special: 'Marriage license valid for 60 days'
+      }
+    };
+    return requirements[state as keyof typeof requirements] || null;
+  };
+
+  const requirements = selectedState ? getStateRequirements(selectedState) : null;
 
   return (
     <section id="legal" className="py-16 bg-gray-50">
@@ -77,6 +69,68 @@ const LegalGuide = ({ userState }: LegalGuideProps) => {
             <TabsTrigger value="process">Process Guide</TabsTrigger>
           </TabsList>
           
+          <TabsContent value="requirements">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Scale className="h-5 w-5 text-blue-600" />
+                  State Requirements
+                </CardTitle>
+                <CardDescription>
+                  Legal requirements for officiating weddings by state
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Select State</label>
+                  <Select value={selectedState} onValueChange={setSelectedState}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose your state" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {states.map((state) => (
+                        <SelectItem key={state} value={state}>{state}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {requirements && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-blue-50 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Users className="h-4 w-4 text-blue-600" />
+                        <span className="font-medium">Age Requirements</span>
+                      </div>
+                      <p className="text-sm text-gray-600">{requirements.age}</p>
+                    </div>
+                    <div className="p-4 bg-green-50 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                        <span className="font-medium">Witnesses</span>
+                      </div>
+                      <p className="text-sm text-gray-600">{requirements.witnesses}</p>
+                    </div>
+                    <div className="p-4 bg-yellow-50 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <AlertCircle className="h-4 w-4 text-yellow-600" />
+                        <span className="font-medium">Waiting Period</span>
+                      </div>
+                      <p className="text-sm text-gray-600">{requirements.waiting}</p>
+                    </div>
+                    <div className="p-4 bg-purple-50 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <FileText className="h-4 w-4 text-purple-600" />
+                        <span className="font-medium">Registration</span>
+                      </div>
+                      <p className="text-sm text-gray-600">{requirements.registration}</p>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
           <TabsContent value="forms">
             <Card>
               <CardHeader>
@@ -94,174 +148,60 @@ const LegalGuide = ({ userState }: LegalGuideProps) => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="requirements">
-            <div className="max-w-4xl mx-auto">
-              <Card className="mb-8">
-                <CardHeader>
-                  <CardTitle>Select Your State</CardTitle>
-                  <CardDescription>
-                    Get specific legal requirements for your location
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Select value={selectedState} onValueChange={setSelectedState}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Choose a state to view requirements" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {states.map((state) => (
-                        <SelectItem key={state.value} value={state.value}>
-                          {state.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </CardContent>
-              </Card>
-
-              {currentRequirements && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <CheckCircle className="h-5 w-5 text-green-600" />
-                        Marriage Requirements
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Age Requirement</h4>
-                        <p className="text-gray-600">{currentRequirements.ageRequirement}</p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Witnesses</h4>
-                        <p className="text-gray-600">{currentRequirements.witnesses}</p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Waiting Period</h4>
-                        <p className="text-gray-600">{currentRequirements.waitingPeriod}</p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-gray-900">License Validity</h4>
-                        <p className="text-gray-600">{currentRequirements.licenseValidity}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <AlertCircle className="h-5 w-5 text-amber-600" />
-                        Officiant Requirements
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Officiant Authorization</h4>
-                        <p className="text-gray-600">{currentRequirements.officiantRequirements}</p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Filing Deadline</h4>
-                        <p className="text-gray-600">{currentRequirements.filingDeadline}</p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-gray-900">Special Notes</h4>
-                        <p className="text-gray-600">{currentRequirements.specialNotes}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="md:col-span-2">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <FileText className="h-5 w-5 text-blue-600" />
-                        Required Forms & Documents
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {currentRequirements.forms.map((form, index) => (
-                          <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <span className="text-sm font-medium text-gray-900">{form}</span>
-                            <Button variant="ghost" size="sm">
-                              <ExternalLink className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      <div className="mt-6 flex gap-3">
-                        <Badge variant="outline" className="text-green-700 border-green-300">
-                          Official State Forms
-                        </Badge>
-                        <Badge variant="outline" className="text-blue-700 border-blue-300">
-                          Auto-Fill Available
-                        </Badge>
-                        <Badge variant="outline" className="text-purple-700 border-purple-300">
-                          Downloadable PDF
-                        </Badge>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              )}
-
-              {!selectedState && (
-                <Card>
-                  <CardContent className="text-center py-12">
-                    <AlertCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Select a State</h3>
-                    <p className="text-gray-600">Choose your state above to view specific legal requirements and access official forms.</p>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          </TabsContent>
-
           <TabsContent value="process">
-            <div className="max-w-4xl mx-auto">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Process Guide</CardTitle>
-                  <CardDescription>
-                    Step-by-step instructions for a successful ceremony
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Step-by-Step Process</CardTitle>
+                <CardDescription>
+                  Complete guide to legally officiating a wedding
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="flex gap-4">
+                    <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
                     <div>
-                      <h4 className="font-semibold text-gray-900">Step 1: Choose Your State</h4>
-                      <p className="text-gray-600">Select your state to view specific legal requirements and access official forms.</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Step 2: Gather Required Documents</h4>
-                      <p className="text-gray-600">Prepare all necessary documents and forms for your ceremony.</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Step 3: Schedule Your Ceremony</h4>
-                      <p className="text-gray-600">Choose a date and time for your ceremony and confirm with your officiant.</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Step 4: Conduct the Ceremony</h4>
-                      <p className="text-gray-600">Follow the officiant's instructions and ensure everything is in order.</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Step 5: Complete the Process</h4>
-                      <p className="text-gray-600">Submit all required documents and forms to complete the ceremony.</p>
+                      <h3 className="font-semibold mb-2">Get Ordained/Registered</h3>
+                      <p className="text-gray-600">Become legally authorized to perform marriages in your state.</p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                  <div className="flex gap-4">
+                    <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Verify Requirements</h3>
+                      <p className="text-gray-600">Check state-specific requirements for witnesses, waiting periods, and documentation.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">3</div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Obtain Marriage License</h3>
+                      <p className="text-gray-600">Ensure the couple has a valid marriage license before the ceremony.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">4</div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Perform Ceremony</h3>
+                      <p className="text-gray-600">Conduct the wedding ceremony according to legal requirements.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">5</div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Complete Documentation</h3>
+                      <p className="text-gray-600">Sign and file the marriage certificate with appropriate authorities.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <Button className="w-full" variant="outline">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    View State-Specific Guidelines
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>

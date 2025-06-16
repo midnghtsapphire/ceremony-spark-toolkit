@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { MapPin, Users, Clock, Heart } from 'lucide-react';
+import { ceremonyTypes } from '@/data/ceremonyTypes';
 
 interface OnboardingData {
   ceremonyType: string;
@@ -35,17 +35,6 @@ const OnboardingQuiz = ({ onComplete }: OnboardingQuizProps) => {
     'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
     'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-  ];
-
-  const ceremonyTypes = [
-    { value: 'traditional', label: 'Traditional Christian', icon: '⛪' },
-    { value: 'non-religious', label: 'Non-Religious', icon: '💍' },
-    { value: 'interfaith', label: 'Interfaith', icon: '🤝' },
-    { value: 'lgbtqia', label: 'LGBTQIA+', icon: '🏳️‍🌈' },
-    { value: 'humorous', label: 'Light & Humorous', icon: '😄' },
-    { value: 'cultural', label: 'Cultural/Ethnic', icon: '🌍' },
-    { value: 'outdoor', label: 'Outdoor/Nature', icon: '🌿' },
-    { value: 'intimate', label: 'Small & Intimate', icon: '❤️' }
   ];
 
   const handleNext = () => {
