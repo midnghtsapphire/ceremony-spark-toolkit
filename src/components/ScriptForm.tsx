@@ -2,13 +2,12 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { FileText, Lock } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ceremonyTypes, durationOptions } from '@/data/ceremonyTypes';
+import { Wand2, Heart, Lock } from 'lucide-react';
 
 interface ScriptFormData {
   ceremonyType: string;
@@ -23,61 +22,87 @@ interface ScriptFormProps {
   onFormChange: (field: keyof ScriptFormData, value: string) => void;
   onGenerate: () => void;
   canGenerate: boolean;
-  isSubscribed: boolean;
+  isSubscribed?: boolean;
 }
 
 const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscribed }: ScriptFormProps) => {
+  const handleCeremonyTypeClick = (ceremonyType: string) => {
+    onFormChange('ceremonyType', ceremonyType);
+  };
+
+  const handleCeremonyTypeDoubleClick = (ceremonyType: string) => {
+    onFormChange('ceremonyType', ceremonyType);
+    // Small delay to ensure state is updated before generating
+    setTimeout(() => {
+      if (canGenerate && formData.couple1Name && formData.couple2Name) {
+        onGenerate();
+      }
+    }, 100);
+  };
+
+  const isFormValid = formData.ceremonyType && formData.couple1Name && formData.couple2Name;
+
   return (
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <FileText className="h-5 w-5 text-blue-600" />
-          Wedding Ceremony Details
+          <Wand2 className="h-5 w-5" />
+          Create Your Wedding Script
         </CardTitle>
         <CardDescription>
-          Customize your marriage ceremony script based on the couple's preferences. Perfect for wedding officiants and ministers.
+          Generate a personalized ceremony script tailored to your needs
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="couple1">Partner 1 Name</Label>
+        {/* Ceremony Type Selection */}
+        <div className="space-y-3">
+          <Label className="text-base font-medium">Choose Ceremony Type</Label>
+          <p className="text-sm text-gray-600">Double-click to auto-generate</p>
+          <div className="grid grid-cols-2 gap-2">
+            {ceremonyTypes.map((type) => (
+              <Button
+                key={type.value}
+                variant={formData.ceremonyType === type.value ? "default" : "outline"}
+                className="h-auto p-3 text-left justify-start"
+                onClick={() => handleCeremonyTypeClick(type.value)}
+                onDoubleClick={() => handleCeremonyTypeDoubleClick(type.value)}
+              >
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span>{type.icon}</span>
+                    <span className="font-medium text-sm">{type.label}</span>
+                  </div>
+                </div>
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Couple Names */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="couple1Name">Partner 1 Name</Label>
             <Input
-              id="couple1"
-              placeholder="Enter first partner's name"
+              id="couple1Name"
+              placeholder="Enter first name"
               value={formData.couple1Name}
               onChange={(e) => onFormChange('couple1Name', e.target.value)}
             />
           </div>
-          <div>
-            <Label htmlFor="couple2">Partner 2 Name</Label>
+          <div className="space-y-2">
+            <Label htmlFor="couple2Name">Partner 2 Name</Label>
             <Input
-              id="couple2"
-              placeholder="Enter second partner's name"
+              id="couple2Name"
+              placeholder="Enter second name"
               value={formData.couple2Name}
               onChange={(e) => onFormChange('couple2Name', e.target.value)}
             />
           </div>
         </div>
 
-        <div>
-          <Label htmlFor="ceremony-type">Wedding Ceremony Style</Label>
-          <Select value={formData.ceremonyType} onValueChange={(value) => onFormChange('ceremonyType', value)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select ceremony style" />
-            </SelectTrigger>
-            <SelectContent>
-              {ceremonyTypes.map((type) => (
-                <SelectItem key={type.value} value={type.value}>
-                  {type.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <Label htmlFor="duration">Marriage Ceremony Duration</Label>
+        {/* Duration */}
+        <div className="space-y-2">
+          <Label>Ceremony Duration</Label>
           <Select value={formData.duration} onValueChange={(value) => onFormChange('duration', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select duration" />
@@ -92,39 +117,43 @@ const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscri
           </Select>
         </div>
 
-        <div>
-          <Label htmlFor="personal-notes">Personal Notes & Wedding Vows</Label>
+        {/* Personal Notes */}
+        <div className="space-y-2">
+          <Label htmlFor="personalNotes">Personal Notes (Optional)</Label>
           <Textarea
-            id="personal-notes"
-            placeholder="Include any special traditions, readings, or personal touches for the wedding ceremony..."
+            id="personalNotes"
+            placeholder="Add any special requests, themes, or personal touches..."
             value={formData.personalNotes}
             onChange={(e) => onFormChange('personalNotes', e.target.value)}
-            rows={4}
+            rows={3}
           />
         </div>
 
-        <Button 
+        {/* Generate Button */}
+        <Button
           onClick={onGenerate}
-          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+          disabled={!canGenerate || !isFormValid}
+          className="w-full"
           size="lg"
-          disabled={!canGenerate}
         >
-          {canGenerate ? (
-            "Generate Custom Wedding Script"
-          ) : (
+          {!canGenerate ? (
             <>
               <Lock className="h-4 w-4 mr-2" />
-              Upgrade for Unlimited Scripts
+              Upgrade to Generate More Scripts
+            </>
+          ) : (
+            <>
+              <Heart className="h-4 w-4 mr-2" />
+              Generate Wedding Script
             </>
           )}
         </Button>
 
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="secondary">Wedding Officiant</Badge>
-          <Badge variant="secondary">Marriage Ceremony</Badge>
-          <Badge variant="secondary">Wedding Vows</Badge>
-          <Badge variant="secondary">Customizable</Badge>
-        </div>
+        {!isFormValid && (
+          <p className="text-sm text-gray-500 text-center">
+            Please select ceremony type and enter both partner names to generate
+          </p>
+        )}
       </CardContent>
     </Card>
   );
