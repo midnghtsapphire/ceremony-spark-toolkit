@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { User, LogOut } from 'lucide-react';
+import { User, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { useAdmin } from '@/hooks/useAdmin';
+import { Link, useLocation } from 'react-router-dom';
 
 interface HeaderProps {
   onAuthClick: () => void;
@@ -10,13 +12,20 @@ interface HeaderProps {
 
 const Header = ({ onAuthClick }: HeaderProps) => {
   const { user, signOut, subscribed, subscriptionTier } = useAuth();
+  const { isAdmin } = useAdmin();
+  const location = useLocation();
+
+  const isProductsPage = location.pathname === '/products';
+  const isHomePage = location.pathname === '/';
 
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-gray-900">CeremonyPro</h1>
+            <Link to="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700">
+              CeremonyPro
+            </Link>
             {subscribed && (
               <span className="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
                 {subscriptionTier}
@@ -25,16 +34,38 @@ const Header = ({ onAuthClick }: HeaderProps) => {
           </div>
           
           <nav className="hidden md:flex space-x-8">
-            <a href="#scripts" className="text-gray-700 hover:text-gray-900">Scripts</a>
-            <a href="#legal" className="text-gray-700 hover:text-gray-900">Legal Guide</a>
-            <a href="#checklist" className="text-gray-700 hover:text-gray-900">Checklist</a>
-            <a href="#tools" className="text-gray-700 hover:text-gray-900">Tools</a>
+            {isProductsPage ? (
+              <Link to="/" className="text-gray-700 hover:text-gray-900">
+                Home
+              </Link>
+            ) : (
+              <>
+                <a href="#scripts" className="text-gray-700 hover:text-gray-900">Scripts</a>
+                <a href="#legal" className="text-gray-700 hover:text-gray-900">Legal Guide</a>
+                <a href="#checklist" className="text-gray-700 hover:text-gray-900">Checklist</a>
+                <a href="#tools" className="text-gray-700 hover:text-gray-900">Tools</a>
+              </>
+            )}
+            <Link 
+              to="/products" 
+              className={`hover:text-gray-900 ${isProductsPage ? 'text-blue-600 font-medium' : 'text-gray-700'}`}
+            >
+              Products
+            </Link>
           </nav>
           
           <div className="flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-2">
                 <span className="text-sm text-gray-700">{user.email}</span>
+                {isAdmin && (
+                  <Link to="/admin">
+                    <Button variant="outline" size="sm">
+                      <Settings className="h-4 w-4 mr-1" />
+                      Admin
+                    </Button>
+                  </Link>
+                )}
                 <Button variant="outline" size="sm" onClick={signOut}>
                   <LogOut className="h-4 w-4 mr-1" />
                   Sign Out
