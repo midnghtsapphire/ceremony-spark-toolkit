@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -7,15 +6,35 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { FileText, Download } from 'lucide-react';
+import { FileText } from 'lucide-react';
+import ScriptExporter from '@/components/ScriptExporter';
 
-const ScriptGenerator = () => {
+interface OnboardingData {
+  ceremonyType: string;
+  state: string;
+  duration: string;
+  experience: string;
+}
+
+interface ScriptGeneratorProps {
+  userPreferences?: OnboardingData | null;
+}
+
+const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
   const [ceremonyType, setCeremonyType] = useState('');
   const [duration, setDuration] = useState('');
   const [personalNotes, setPersonalNotes] = useState('');
   const [couple1Name, setCouple1Name] = useState('');
   const [couple2Name, setCouple2Name] = useState('');
   const [generatedScript, setGeneratedScript] = useState('');
+
+  // Auto-populate from user preferences
+  useEffect(() => {
+    if (userPreferences) {
+      setCeremonyType(userPreferences.ceremonyType);
+      setDuration(userPreferences.duration);
+    }
+  }, [userPreferences]);
 
   const generateScript = () => {
     const scriptTemplate = `
@@ -43,7 +62,7 @@ The ring is a symbol of eternity, with no beginning and no end. May these rings 
 
 PRONOUNCEMENT
 
-By the power vested in me by the state of [STATE], I now pronounce you married. You may kiss!
+By the power vested in me by the state of ${userPreferences?.state || '[STATE]'}, I now pronounce you married. You may kiss!
 
 ${personalNotes ? `\nPersonal Notes:\n${personalNotes}` : ''}
     `;
@@ -68,6 +87,13 @@ ${personalNotes ? `\nPersonal Notes:\n${personalNotes}` : ''}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">AI-Powered Script Generator</h2>
           <p className="text-lg text-gray-600">Create personalized ceremony scripts in minutes</p>
+          {userPreferences && (
+            <div className="flex justify-center gap-2 mt-4">
+              <Badge variant="secondary">{userPreferences.ceremonyType}</Badge>
+              <Badge variant="secondary">{userPreferences.state}</Badge>
+              <Badge variant="secondary">{userPreferences.duration}</Badge>
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -177,16 +203,11 @@ ${personalNotes ? `\nPersonal Notes:\n${personalNotes}` : ''}
                       {generatedScript}
                     </pre>
                   </div>
-                  <div className="flex gap-2">
-                    <Button variant="outline" className="flex-1">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download PDF
-                    </Button>
-                    <Button variant="outline" className="flex-1">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download DOCX
-                    </Button>
-                  </div>
+                  <ScriptExporter
+                    script={generatedScript}
+                    coupleNames={{ partner1: couple1Name, partner2: couple2Name }}
+                    ceremonyType={ceremonyType}
+                  />
                 </div>
               ) : (
                 <div className="text-center py-12">
