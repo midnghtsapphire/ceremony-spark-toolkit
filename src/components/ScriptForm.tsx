@@ -28,11 +28,8 @@ interface ScriptFormProps {
 const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscribed }: ScriptFormProps) => {
   const handleCeremonyTypeClick = (ceremonyType: string) => {
     onFormChange('ceremonyType', ceremonyType);
-  };
-
-  const handleCeremonyTypeDoubleClick = (ceremonyType: string) => {
-    onFormChange('ceremonyType', ceremonyType);
-    // Small delay to ensure state is updated before generating
+    
+    // Auto-generate if form is valid and user can generate
     setTimeout(() => {
       if (canGenerate && formData.couple1Name && formData.couple2Name) {
         onGenerate();
@@ -57,7 +54,7 @@ const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscri
         {/* Ceremony Type Selection */}
         <div className="space-y-3">
           <Label className="text-base font-medium">Choose Ceremony Type</Label>
-          <p className="text-sm text-gray-600">Double-click to auto-generate</p>
+          <p className="text-sm text-gray-600">Click to select and auto-generate</p>
           <div className="grid grid-cols-2 gap-2">
             {ceremonyTypes.map((type) => (
               <Button
@@ -65,7 +62,6 @@ const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscri
                 variant={formData.ceremonyType === type.value ? "default" : "outline"}
                 className="h-auto p-3 text-left justify-start"
                 onClick={() => handleCeremonyTypeClick(type.value)}
-                onDoubleClick={() => handleCeremonyTypeDoubleClick(type.value)}
               >
                 <div>
                   <div className="flex items-center gap-2">
