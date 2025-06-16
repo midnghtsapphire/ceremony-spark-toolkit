@@ -14,7 +14,7 @@ interface ScriptPreviewProps {
 
 const ScriptPreview = ({ script, coupleNames, ceremonyType, isSubscribed }: ScriptPreviewProps) => {
   return (
-    <Card className="border-2 border-gradient-to-r from-pink-200 to-purple-200 shadow-lg">
+    <Card className="border-2 border-gradient-to-r from-pink-200 to-purple-200 shadow-lg" data-script-preview>
       <CardHeader className="bg-gradient-to-r from-pink-50 to-purple-50">
         <div className="flex items-center gap-2">
           <div className="p-2 bg-gradient-to-br from-pink-400 to-purple-500 rounded-lg">

@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ceremonyTypes, durationOptions } from '@/data/ceremonyTypes';
 import { Wand2, Heart, Lock } from 'lucide-react';
+import { toast } from '@/components/ui/sonner';
 
 interface ScriptFormData {
   ceremonyType: string;
@@ -33,6 +34,15 @@ const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscri
     setTimeout(() => {
       if (canGenerate && formData.couple1Name && formData.couple2Name) {
         onGenerate();
+        // Show toast notification
+        toast(`Generating ${ceremonyType} script for ${formData.couple1Name} & ${formData.couple2Name}...`);
+        // Scroll to preview section after a short delay
+        setTimeout(() => {
+          const scriptPreview = document.querySelector('[data-script-preview]');
+          if (scriptPreview) {
+            scriptPreview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 500);
       }
     }, 100);
   };
