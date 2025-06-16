@@ -12,7 +12,7 @@ const plans = [
   {
     name: 'Basic',
     price: '$29',
-    priceId: 'price_1RLdqrP8T6VGDCG5basic', // You'll need to create these in Stripe
+    priceId: 'price_1Raj2wP8T6VGDCG5sDbSl8MM',
     features: [
       'Basic ceremony scripts',
       'Standard templates',
