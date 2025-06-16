@@ -57,10 +57,11 @@ const Index = () => {
 
   // Show onboarding for authenticated users who haven't completed it
   useEffect(() => {
-    if (user && !userPreferences) {
+    if (!loading && user && !userPreferences) {
+      console.log('Showing onboarding for user:', user.email);
       setShowOnboarding(true);
     }
-  }, [user, userPreferences]);
+  }, [user, userPreferences, loading]);
 
   if (loading) {
     return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
@@ -68,26 +69,34 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {showOnboarding && user && <OnboardingQuiz onComplete={handleOnboardingComplete} />}
-      <Header onAuthClick={() => setShowAuthModal(true)} />
-      <HeroSection onAuthClick={() => setShowAuthModal(true)} />
+      {showOnboarding && user && (
+        <OnboardingQuiz onComplete={handleOnboardingComplete} />
+      )}
       
-      {/* Premium Features Section */}
-      {!user && <SubscriptionPlans />}
-      
-      <ScriptGenerator userPreferences={userPreferences} />
-      <ScriptLibrary />
-      <LegalGuide userState={userPreferences?.state} />
-      <CeremonyChecklist />
-      <ToolsSection />
-      
-      {/* Reviews and Social Proof */}
-      <ReviewsSection />
-      
-      {/* Show subscription plans for authenticated users */}
-      {user && <SubscriptionPlans />}
-      
-      <Footer />
+      {/* Only show main content when onboarding is not active */}
+      {!showOnboarding && (
+        <>
+          <Header onAuthClick={() => setShowAuthModal(true)} />
+          <HeroSection onAuthClick={() => setShowAuthModal(true)} />
+          
+          {/* Premium Features Section */}
+          {!user && <SubscriptionPlans />}
+          
+          <ScriptGenerator userPreferences={userPreferences} />
+          <ScriptLibrary />
+          <LegalGuide userState={userPreferences?.state} />
+          <CeremonyChecklist />
+          <ToolsSection />
+          
+          {/* Reviews and Social Proof */}
+          <ReviewsSection />
+          
+          {/* Show subscription plans for authenticated users */}
+          {user && <SubscriptionPlans />}
+          
+          <Footer />
+        </>
+      )}
       
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
