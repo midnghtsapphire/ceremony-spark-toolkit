@@ -7,6 +7,7 @@ import ScriptLibrary from '@/components/ScriptLibrary';
 import LegalGuide from '@/components/LegalGuide';
 import CeremonyChecklist from '@/components/CeremonyChecklist';
 import ToolsSection from '@/components/ToolsSection';
+import ReviewsSection from '@/components/ReviewsSection';
 import Footer from '@/components/Footer';
 import OnboardingQuiz from '@/components/OnboardingQuiz';
 import SubscriptionPlans from '@/components/SubscriptionPlans';
@@ -79,6 +80,9 @@ const Index = () => {
       <LegalGuide userState={userPreferences?.state} />
       <CeremonyChecklist />
       <ToolsSection />
+      
+      {/* Reviews and Social Proof */}
+      <ReviewsSection />
       
       {/* Show subscription plans for authenticated users */}
       {user && <SubscriptionPlans />}
