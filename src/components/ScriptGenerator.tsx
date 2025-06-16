@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Lock } from 'lucide-react';
 import ScriptForm from '@/components/ScriptForm';
 import ScriptPreview from '@/components/ScriptPreview';
-import { generateScriptTemplate } from '@/utils/scriptGenerator';
+import ScriptVariationSelector from '@/components/ScriptVariationSelector';
+import { generateEnhancedScript } from '@/utils/enhancedScriptGenerator';
 import { useAuth } from '@/hooks/useAuth';
 
 interface OnboardingData {
@@ -36,6 +37,7 @@ const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
     couple1Name: '',
     couple2Name: ''
   });
+  const [selectedVariation, setSelectedVariation] = useState('');
   const [generatedScript, setGeneratedScript] = useState('');
   const [scriptCount, setScriptCount] = useState(0);
 
@@ -52,30 +54,39 @@ const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
 
   const handleFormChange = (field: keyof ScriptFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // Reset variation when ceremony type changes
+    if (field === 'ceremonyType') {
+      setSelectedVariation('');
+    }
   };
 
   const generateScript = () => {
     // Check if user can generate scripts
     if (!user) {
-      // Allow one free script for non-users
       if (scriptCount >= 1) {
         return;
       }
       setScriptCount(prev => prev + 1);
     } else if (!subscribed && scriptCount >= 1) {
-      // Authenticated but not subscribed users get one free script
       return;
     }
 
-    const script = generateScriptTemplate({
+    const script = generateEnhancedScript({
       partner1: formData.couple1Name,
       partner2: formData.couple2Name,
       state: userPreferences?.state,
       personalNotes: formData.personalNotes,
-      ceremonyType: formData.ceremonyType
+      ceremonyType: formData.ceremonyType,
+      variationId: selectedVariation
     });
     
     setGeneratedScript(script);
+  };
+
+  const generateAnotherScript = () => {
+    if (canGenerateScript()) {
+      generateScript();
+    }
   };
 
   const canGenerateScript = () => {
@@ -100,13 +111,24 @@ const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <ScriptForm
-            formData={formData}
-            onFormChange={handleFormChange}
-            onGenerate={generateScript}
-            canGenerate={canGenerateScript()}
-            isSubscribed={subscribed}
-          />
+          <div className="space-y-6">
+            <ScriptForm
+              formData={formData}
+              onFormChange={handleFormChange}
+              onGenerate={generateScript}
+              canGenerate={canGenerateScript()}
+              isSubscribed={subscribed}
+            />
+            
+            {formData.ceremonyType && (
+              <ScriptVariationSelector
+                ceremonyType={formData.ceremonyType}
+                selectedVariation={selectedVariation}
+                onVariationSelect={setSelectedVariation}
+                onGenerateAnother={generateAnotherScript}
+              />
+            )}
+          </div>
           
           <ScriptPreview
             script={generatedScript}

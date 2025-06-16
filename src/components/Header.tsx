@@ -40,7 +40,8 @@ const Header = ({ onAuthClick }: HeaderProps) => {
               </Link>
             ) : (
               <>
-                <a href="#scripts" className="text-gray-700 hover:text-gray-900">Scripts</a>
+                <a href="#scripts" className="text-gray-700 hover:text-gray-900">AI Generator</a>
+                <a href="#library" className="text-gray-700 hover:text-gray-900">Script Library</a>
                 <a href="#legal" className="text-gray-700 hover:text-gray-900">Legal Guide</a>
                 <a href="#checklist" className="text-gray-700 hover:text-gray-900">Checklist</a>
                 <a href="#tools" className="text-gray-700 hover:text-gray-900">Tools</a>

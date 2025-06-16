@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import ScriptGenerator from '@/components/ScriptGenerator';
+import ScriptLibrary from '@/components/ScriptLibrary';
 import LegalGuide from '@/components/LegalGuide';
 import CeremonyChecklist from '@/components/CeremonyChecklist';
 import ToolsSection from '@/components/ToolsSection';
@@ -74,6 +75,7 @@ const Index = () => {
       {!user && <SubscriptionPlans />}
       
       <ScriptGenerator userPreferences={userPreferences} />
+      <ScriptLibrary />
       <LegalGuide userState={userPreferences?.state} />
       <CeremonyChecklist />
       <ToolsSection />
