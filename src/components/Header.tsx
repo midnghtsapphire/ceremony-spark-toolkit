@@ -1,41 +1,52 @@
 
 import React from 'react';
-import { Heart, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { User, LogOut } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 
-const Header = () => {
+interface HeaderProps {
+  onAuthClick: () => void;
+}
+
+const Header = ({ onAuthClick }: HeaderProps) => {
+  const { user, signOut, subscribed, subscriptionTier } = useAuth();
+
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 p-2 rounded-lg">
-              <Heart className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">CeremonyPro</h1>
-              <p className="text-xs text-gray-500">Professional Wedding Officiant Toolkit</p>
-            </div>
+        <div className="flex justify-between items-center py-4">
+          <div className="flex items-center">
+            <h1 className="text-2xl font-bold text-gray-900">CeremonyPro</h1>
+            {subscribed && (
+              <span className="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                {subscriptionTier}
+              </span>
+            )}
           </div>
           
-          <nav className="hidden md:flex space-x-6">
-            <a href="#scripts" className="text-gray-600 hover:text-pink-600 font-medium transition-colors">
-              Scripts
-            </a>
-            <a href="#legal" className="text-gray-600 hover:text-pink-600 font-medium transition-colors">
-              Legal Guide
-            </a>
-            <a href="#checklist" className="text-gray-600 hover:text-pink-600 font-medium transition-colors">
-              Checklist
-            </a>
-            <a href="#tools" className="text-gray-600 hover:text-pink-600 font-medium transition-colors">
-              Tools
-            </a>
+          <nav className="hidden md:flex space-x-8">
+            <a href="#scripts" className="text-gray-700 hover:text-gray-900">Scripts</a>
+            <a href="#legal" className="text-gray-700 hover:text-gray-900">Legal Guide</a>
+            <a href="#checklist" className="text-gray-700 hover:text-gray-900">Checklist</a>
+            <a href="#tools" className="text-gray-700 hover:text-gray-900">Tools</a>
           </nav>
-
-          <Button variant="outline" size="sm" className="md:hidden">
-            <Menu className="h-4 w-4" />
-          </Button>
+          
+          <div className="flex items-center space-x-4">
+            {user ? (
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-700">{user.email}</span>
+                <Button variant="outline" size="sm" onClick={signOut}>
+                  <LogOut className="h-4 w-4 mr-1" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <Button onClick={onAuthClick} variant="outline">
+                <User className="h-4 w-4 mr-2" />
+                Sign In
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </header>
