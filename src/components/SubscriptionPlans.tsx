@@ -36,7 +36,7 @@ const plans = [
   {
     name: 'Enterprise',
     price: '$99',
-    priceId: 'price_1RLdqrP8T6VGDCG5enterprise',
+    priceId: 'price_1Raj5MP8T6VGDCG5DMGzdlG2',
     features: [
       'All Premium features',
       'White-label options',
