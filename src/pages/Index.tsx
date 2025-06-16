@@ -21,7 +21,7 @@ interface OnboardingData {
 }
 
 const Index = () => {
-  const [showOnboarding, setShowOnboarding] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [userPreferences, setUserPreferences] = useState<OnboardingData | null>(null);
   const { user, subscribed, loading } = useAuth();
@@ -53,13 +53,20 @@ const Index = () => {
     }
   }, [toast]);
 
+  // Show onboarding for authenticated users who haven't completed it
+  useEffect(() => {
+    if (user && !userPreferences) {
+      setShowOnboarding(true);
+    }
+  }, [user, userPreferences]);
+
   if (loading) {
     return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
   }
 
   return (
     <div className="min-h-screen bg-white">
-      {showOnboarding && <OnboardingQuiz onComplete={handleOnboardingComplete} />}
+      {showOnboarding && user && <OnboardingQuiz onComplete={handleOnboardingComplete} />}
       <Header onAuthClick={() => setShowAuthModal(true)} />
       <HeroSection onAuthClick={() => setShowAuthModal(true)} />
       
