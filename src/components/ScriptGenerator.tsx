@@ -1,9 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Lock } from 'lucide-react';
 import ScriptForm from '@/components/ScriptForm';
 import ScriptPreview from '@/components/ScriptPreview';
 import { generateScriptTemplate } from '@/utils/scriptGenerator';
+import { useAuth } from '@/hooks/useAuth';
 
 interface OnboardingData {
   ceremonyType: string;
@@ -25,6 +28,7 @@ interface ScriptFormData {
 }
 
 const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
+  const { user, subscribed } = useAuth();
   const [formData, setFormData] = useState<ScriptFormData>({
     ceremonyType: '',
     duration: '',
@@ -33,6 +37,7 @@ const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
     couple2Name: ''
   });
   const [generatedScript, setGeneratedScript] = useState('');
+  const [scriptCount, setScriptCount] = useState(0);
 
   // Auto-populate from user preferences
   useEffect(() => {
@@ -50,6 +55,18 @@ const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
   };
 
   const generateScript = () => {
+    // Check if user can generate scripts
+    if (!user) {
+      // Allow one free script for non-users
+      if (scriptCount >= 1) {
+        return;
+      }
+      setScriptCount(prev => prev + 1);
+    } else if (!subscribed && scriptCount >= 1) {
+      // Authenticated but not subscribed users get one free script
+      return;
+    }
+
     const script = generateScriptTemplate({
       partner1: formData.couple1Name,
       partner2: formData.couple2Name,
@@ -61,12 +78,18 @@ const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
     setGeneratedScript(script);
   };
 
+  const canGenerateScript = () => {
+    if (!user && scriptCount >= 1) return false;
+    if (user && !subscribed && scriptCount >= 1) return false;
+    return true;
+  };
+
   return (
     <section id="scripts" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">AI-Powered Script Generator</h2>
-          <p className="text-lg text-gray-600">Create personalized ceremony scripts in minutes</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">AI-Powered Wedding Officiant Script Generator</h2>
+          <p className="text-lg text-gray-600">Create personalized marriage ceremony scripts in minutes. Perfect for wedding officiants, ministers, and celebrants conducting wedding ceremonies.</p>
           {userPreferences && (
             <div className="flex justify-center gap-2 mt-4">
               <Badge variant="secondary">{userPreferences.ceremonyType}</Badge>
@@ -81,14 +104,33 @@ const ScriptGenerator = ({ userPreferences }: ScriptGeneratorProps) => {
             formData={formData}
             onFormChange={handleFormChange}
             onGenerate={generateScript}
+            canGenerate={canGenerateScript()}
+            isSubscribed={subscribed}
           />
           
           <ScriptPreview
             script={generatedScript}
             coupleNames={{ partner1: formData.couple1Name, partner2: formData.couple2Name }}
             ceremonyType={formData.ceremonyType}
+            isSubscribed={subscribed}
           />
         </div>
+
+        {!canGenerateScript() && (
+          <div className="mt-8 text-center">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-lg border border-blue-200 max-w-md mx-auto">
+              <Lock className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Unlock Unlimited Wedding Scripts</h3>
+              <p className="text-gray-600 mb-4">Get unlimited AI-generated ceremony scripts for all your wedding officiant needs</p>
+              <Button 
+                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-gradient-to-r from-blue-600 to-purple-600"
+              >
+                Upgrade to Premium
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

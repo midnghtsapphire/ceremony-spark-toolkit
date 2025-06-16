@@ -16,28 +16,29 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Create Beautiful
-            <span className="text-blue-600"> Wedding Ceremonies</span>
+            Professional Wedding Officiant
+            <span className="text-blue-600"> Ceremony Toolkit</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            AI-powered tools to help officiants create personalized, memorable ceremonies. 
-            From scripts to legal guidance, everything you need in one place.
+            The complete marriage officiant platform with AI-powered wedding ceremony scripts, 
+            legal marriage requirements, officiant certification, and professional wedding tools. 
+            Perfect for ministers, celebrants, and wedding officiants.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             {!user ? (
               <>
                 <Button size="lg" onClick={onAuthClick}>
-                  Get Started Free
+                  Start Your Officiant Journey
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button variant="outline" size="lg">
-                  View Demo
+                  View Wedding Scripts Demo
                 </Button>
               </>
             ) : (
               <Button size="lg" onClick={() => document.getElementById('scripts')?.scrollIntoView({ behavior: 'smooth' })}>
-                Create Your Script
+                Create Wedding Ceremony Script
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             )}
@@ -46,18 +47,18 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="flex flex-col items-center">
               <Heart className="h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900">Personalized Scripts</h3>
-              <p className="text-gray-600 text-center">AI-generated ceremony scripts tailored to each couple</p>
+              <h3 className="text-lg font-semibold text-gray-900">Personalized Wedding Scripts</h3>
+              <p className="text-gray-600 text-center">AI-generated marriage ceremony scripts tailored for every couple and officiant style</p>
             </div>
             <div className="flex flex-col items-center">
               <Users className="h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900">Legal Guidance</h3>
-              <p className="text-gray-600 text-center">State-specific requirements and documentation</p>
+              <h3 className="text-lg font-semibold text-gray-900">Marriage License Guidance</h3>
+              <p className="text-gray-600 text-center">State-specific marriage requirements, legal documentation, and officiant regulations</p>
             </div>
             <div className="flex flex-col items-center">
               <Award className="h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900">Professional Tools</h3>
-              <p className="text-gray-600 text-center">Complete toolkit for ceremony planning and execution</p>
+              <h3 className="text-lg font-semibold text-gray-900">Officiant Certification</h3>
+              <p className="text-gray-600 text-center">Professional wedding officiant tools, certificates, and ceremony planning resources</p>
             </div>
           </div>
         </div>

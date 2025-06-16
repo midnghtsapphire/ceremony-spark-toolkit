@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { FileText } from 'lucide-react';
+import { FileText, Lock } from 'lucide-react';
 import { ceremonyTypes, durationOptions } from '@/data/ceremonyTypes';
 
 interface ScriptFormData {
@@ -22,18 +22,20 @@ interface ScriptFormProps {
   formData: ScriptFormData;
   onFormChange: (field: keyof ScriptFormData, value: string) => void;
   onGenerate: () => void;
+  canGenerate: boolean;
+  isSubscribed: boolean;
 }
 
-const ScriptForm = ({ formData, onFormChange, onGenerate }: ScriptFormProps) => {
+const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscribed }: ScriptFormProps) => {
   return (
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <FileText className="h-5 w-5 text-blue-600" />
-          Ceremony Details
+          Wedding Ceremony Details
         </CardTitle>
         <CardDescription>
-          Customize your ceremony script based on the couple's preferences
+          Customize your marriage ceremony script based on the couple's preferences. Perfect for wedding officiants and ministers.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -59,7 +61,7 @@ const ScriptForm = ({ formData, onFormChange, onGenerate }: ScriptFormProps) => 
         </div>
 
         <div>
-          <Label htmlFor="ceremony-type">Ceremony Style</Label>
+          <Label htmlFor="ceremony-type">Wedding Ceremony Style</Label>
           <Select value={formData.ceremonyType} onValueChange={(value) => onFormChange('ceremonyType', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select ceremony style" />
@@ -75,7 +77,7 @@ const ScriptForm = ({ formData, onFormChange, onGenerate }: ScriptFormProps) => 
         </div>
 
         <div>
-          <Label htmlFor="duration">Ceremony Duration</Label>
+          <Label htmlFor="duration">Marriage Ceremony Duration</Label>
           <Select value={formData.duration} onValueChange={(value) => onFormChange('duration', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select duration" />
@@ -91,10 +93,10 @@ const ScriptForm = ({ formData, onFormChange, onGenerate }: ScriptFormProps) => 
         </div>
 
         <div>
-          <Label htmlFor="personal-notes">Personal Notes & Special Requests</Label>
+          <Label htmlFor="personal-notes">Personal Notes & Wedding Vows</Label>
           <Textarea
             id="personal-notes"
-            placeholder="Include any special traditions, readings, or personal touches..."
+            placeholder="Include any special traditions, readings, or personal touches for the wedding ceremony..."
             value={formData.personalNotes}
             onChange={(e) => onFormChange('personalNotes', e.target.value)}
             rows={4}
@@ -105,14 +107,22 @@ const ScriptForm = ({ formData, onFormChange, onGenerate }: ScriptFormProps) => 
           onClick={onGenerate}
           className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
           size="lg"
+          disabled={!canGenerate}
         >
-          Generate Custom Script
+          {canGenerate ? (
+            "Generate Custom Wedding Script"
+          ) : (
+            <>
+              <Lock className="h-4 w-4 mr-2" />
+              Upgrade for Unlimited Scripts
+            </>
+          )}
         </Button>
 
         <div className="flex flex-wrap gap-2">
-          <Badge variant="secondary">Traditional</Badge>
-          <Badge variant="secondary">Modern</Badge>
-          <Badge variant="secondary">Inclusive</Badge>
+          <Badge variant="secondary">Wedding Officiant</Badge>
+          <Badge variant="secondary">Marriage Ceremony</Badge>
+          <Badge variant="secondary">Wedding Vows</Badge>
           <Badge variant="secondary">Customizable</Badge>
         </div>
       </CardContent>

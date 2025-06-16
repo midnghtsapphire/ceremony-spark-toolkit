@@ -1,16 +1,18 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, Sparkles } from 'lucide-react';
+import { FileText, Sparkles, Lock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import ScriptExporter from '@/components/ScriptExporter';
 
 interface ScriptPreviewProps {
   script: string;
   coupleNames: { partner1: string; partner2: string };
   ceremonyType: string;
+  isSubscribed: boolean;
 }
 
-const ScriptPreview = ({ script, coupleNames, ceremonyType }: ScriptPreviewProps) => {
+const ScriptPreview = ({ script, coupleNames, ceremonyType, isSubscribed }: ScriptPreviewProps) => {
   return (
     <Card className="border-2 border-gradient-to-r from-pink-200 to-purple-200 shadow-lg">
       <CardHeader className="bg-gradient-to-r from-pink-50 to-purple-50">
@@ -20,10 +22,10 @@ const ScriptPreview = ({ script, coupleNames, ceremonyType }: ScriptPreviewProps
           </div>
           <div>
             <CardTitle className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
-              Generated Script Preview
+              Generated Wedding Script Preview
             </CardTitle>
             <CardDescription>
-              Your personalized ceremony script will appear here
+              Your personalized marriage ceremony script for officiants
             </CardDescription>
           </div>
         </div>
@@ -36,11 +38,25 @@ const ScriptPreview = ({ script, coupleNames, ceremonyType }: ScriptPreviewProps
                 {script}
               </pre>
             </div>
-            <ScriptExporter
-              script={script}
-              coupleNames={coupleNames}
-              ceremonyType={ceremonyType}
-            />
+            {isSubscribed ? (
+              <ScriptExporter
+                script={script}
+                coupleNames={coupleNames}
+                ceremonyType={ceremonyType}
+              />
+            ) : (
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-200 text-center">
+                <Lock className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                <p className="text-sm text-gray-600 mb-3">Upgrade to download and export your wedding ceremony scripts</p>
+                <Button 
+                  size="sm"
+                  onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600"
+                >
+                  Upgrade to Premium
+                </Button>
+              </div>
+            )}
           </div>
         ) : (
           <div className="text-center py-12">
@@ -53,7 +69,7 @@ const ScriptPreview = ({ script, coupleNames, ceremonyType }: ScriptPreviewProps
               </div>
             </div>
             <p className="text-gray-500 mb-4">
-              Fill out the form and click "Generate Custom Script" to see your personalized ceremony script here.
+              Fill out the form and click "Generate Custom Wedding Script" to see your personalized marriage ceremony script here.
             </p>
             <div className="flex justify-center space-x-4 text-2xl opacity-50">
               <span>💒</span>
