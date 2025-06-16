@@ -9,26 +9,26 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg">
+            <div className="bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 p-2 rounded-lg">
               <Heart className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">Digital Officiant Toolkit</h1>
-              <p className="text-xs text-gray-500">Expert Wedding Ceremony Guide</p>
+              <h1 className="text-xl font-bold text-gray-900">CeremonyPro</h1>
+              <p className="text-xs text-gray-500">Professional Wedding Officiant Toolkit</p>
             </div>
           </div>
           
           <nav className="hidden md:flex space-x-6">
-            <a href="#scripts" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
+            <a href="#scripts" className="text-gray-600 hover:text-pink-600 font-medium transition-colors">
               Scripts
             </a>
-            <a href="#legal" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
+            <a href="#legal" className="text-gray-600 hover:text-pink-600 font-medium transition-colors">
               Legal Guide
             </a>
-            <a href="#checklist" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
+            <a href="#checklist" className="text-gray-600 hover:text-pink-600 font-medium transition-colors">
               Checklist
             </a>
-            <a href="#tools" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
+            <a href="#tools" className="text-gray-600 hover:text-pink-600 font-medium transition-colors">
               Tools
             </a>
           </nav>

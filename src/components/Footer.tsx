@@ -9,17 +9,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg">
+              <div className="bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 p-2 rounded-lg">
                 <Heart className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">Digital Officiant Toolkit</h3>
-                <p className="text-gray-400 text-sm">Expert Wedding Ceremony Guide</p>
+                <h3 className="text-xl font-bold">CeremonyPro</h3>
+                <p className="text-gray-400 text-sm">Professional Wedding Officiant Toolkit</p>
               </div>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              Empowering officiants with professional tools, legal guidance, and 
-              AI-powered ceremony scripts for unforgettable weddings.
+              Empowering professional officiants with expert tools, comprehensive legal guidance, and 
+              AI-powered ceremony scripts for exceptional wedding experiences.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -32,19 +32,19 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">Tools</h4>
+            <h4 className="text-lg font-semibold mb-4">Professional Tools</h4>
             <ul className="space-y-2 text-gray-400">
               <li><a href="#scripts" className="hover:text-white transition-colors">Script Generator</a></li>
-              <li><a href="#legal" className="hover:text-white transition-colors">Legal Guide</a></li>
+              <li><a href="#legal" className="hover:text-white transition-colors">Legal Compliance</a></li>
               <li><a href="#checklist" className="hover:text-white transition-colors">Ceremony Checklist</a></li>
-              <li><a href="#tools" className="hover:text-white transition-colors">Professional Tools</a></li>
+              <li><a href="#tools" className="hover:text-white transition-colors">Expert Resources</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">Resources</h4>
+            <h4 className="text-lg font-semibold mb-4">Expert Resources</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Getting Started</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Professional Guide</a></li>
               <li><a href="#" className="hover:text-white transition-colors">State Requirements</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Best Practices</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Support Center</a></li>
@@ -54,7 +54,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2024 Digital Officiant Toolkit. All rights reserved.
+            © 2024 CeremonyPro. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>

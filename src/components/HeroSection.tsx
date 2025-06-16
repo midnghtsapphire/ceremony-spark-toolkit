@@ -30,23 +30,24 @@ const HeroSection = () => {
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Perfect Wedding
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600">
-              {" "}Ceremonies
+              CeremonyPro
             </span>
+            <br />
+            Professional Wedding Toolkit
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Expert officiant toolkit with AI-powered scripts, legal compliance guides, 
-            and ceremony management tools. Create magical moments with confidence.
+            The premier professional toolkit for wedding officiants. AI-powered ceremony scripts, 
+            legal compliance guides, and comprehensive ceremony management tools for flawless ceremonies.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button size="lg" className="bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:via-rose-600 hover:to-purple-700 text-white px-8 py-3 shadow-lg transform hover:scale-105 transition-all duration-200">
-              Generate Your First Script ✨
+              Generate Professional Script ✨
             </Button>
             <Button variant="outline" size="lg" className="px-8 py-3 border-2 border-purple-300 text-purple-700 hover:bg-purple-50 transform hover:scale-105 transition-all duration-200">
-              Check Legal Requirements 📋
+              Legal Compliance Guide 📋
             </Button>
           </div>
 
@@ -55,24 +56,24 @@ const HeroSection = () => {
               <div className="bg-gradient-to-br from-blue-100 to-cyan-100 p-6 rounded-2xl w-20 h-20 mx-auto mb-4 shadow-lg transform group-hover:scale-110 transition-all duration-300">
                 <FileText className="h-8 w-8 text-blue-600 mx-auto mt-2" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">AI-Powered Scripts</h3>
-              <p className="text-gray-600">Customize ceremony scripts for any style or tradition</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Professional AI Scripts</h3>
+              <p className="text-gray-600">Expert-level ceremony scripts for any style or tradition</p>
             </div>
 
             <div className="text-center group">
               <div className="bg-gradient-to-br from-purple-100 to-pink-100 p-6 rounded-2xl w-20 h-20 mx-auto mb-4 shadow-lg transform group-hover:scale-110 transition-all duration-300">
                 <Calendar className="h-8 w-8 text-purple-600 mx-auto mt-2" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Legal Compliance</h3>
-              <p className="text-gray-600">State-specific requirements and official forms</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Legal Expertise</h3>
+              <p className="text-gray-600">Complete state-specific requirements and official documentation</p>
             </div>
 
             <div className="text-center group">
               <div className="bg-gradient-to-br from-rose-100 to-pink-100 p-6 rounded-2xl w-20 h-20 mx-auto mb-4 shadow-lg transform group-hover:scale-110 transition-all duration-300">
                 <Heart className="h-8 w-8 text-pink-600 mx-auto mt-2" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Ceremony Management</h3>
-              <p className="text-gray-600">Step-by-step guides and day-of checklists</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Complete Management</h3>
+              <p className="text-gray-600">Professional ceremony management and day-of execution tools</p>
             </div>
           </div>
 
