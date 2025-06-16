@@ -30,6 +30,7 @@ const Index = () => {
   const { toast } = useToast();
 
   const handleOnboardingComplete = (data: OnboardingData) => {
+    console.log('Onboarding completed with data:', data);
     setUserPreferences(data);
     setShowOnboarding(false);
   };
@@ -57,24 +58,31 @@ const Index = () => {
 
   // Show onboarding for authenticated users who haven't completed it
   useEffect(() => {
+    console.log('Auth state check - loading:', loading, 'user:', !!user, 'userPreferences:', !!userPreferences);
     if (!loading && user && !userPreferences) {
-      console.log('Showing onboarding for user:', user.email);
+      console.log('Setting showOnboarding to true for user:', user.email);
       setShowOnboarding(true);
+    } else {
+      console.log('Not showing onboarding - conditions not met');
     }
   }, [user, userPreferences, loading]);
+
+  // Additional debug logging for showOnboarding state
+  useEffect(() => {
+    console.log('showOnboarding state changed to:', showOnboarding);
+  }, [showOnboarding]);
 
   if (loading) {
     return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
   }
 
+  console.log('Rendering Index - showOnboarding:', showOnboarding, 'user:', !!user);
+
   return (
     <div className="min-h-screen bg-white">
-      {showOnboarding && user && (
+      {showOnboarding && user ? (
         <OnboardingQuiz onComplete={handleOnboardingComplete} />
-      )}
-      
-      {/* Only show main content when onboarding is not active */}
-      {!showOnboarding && (
+      ) : (
         <>
           <Header onAuthClick={() => setShowAuthModal(true)} />
           <HeroSection onAuthClick={() => setShowAuthModal(true)} />
