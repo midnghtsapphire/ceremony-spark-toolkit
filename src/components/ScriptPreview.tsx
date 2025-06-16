@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText } from 'lucide-react';
+import { FileText, Sparkles } from 'lucide-react';
 import ScriptExporter from '@/components/ScriptExporter';
 
 interface ScriptPreviewProps {
@@ -12,18 +12,27 @@ interface ScriptPreviewProps {
 
 const ScriptPreview = ({ script, coupleNames, ceremonyType }: ScriptPreviewProps) => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Generated Script Preview</CardTitle>
-        <CardDescription>
-          Your personalized ceremony script will appear here
-        </CardDescription>
+    <Card className="border-2 border-gradient-to-r from-pink-200 to-purple-200 shadow-lg">
+      <CardHeader className="bg-gradient-to-r from-pink-50 to-purple-50">
+        <div className="flex items-center gap-2">
+          <div className="p-2 bg-gradient-to-br from-pink-400 to-purple-500 rounded-lg">
+            <Sparkles className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <CardTitle className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
+              Generated Script Preview
+            </CardTitle>
+            <CardDescription>
+              Your personalized ceremony script will appear here
+            </CardDescription>
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
         {script ? (
           <div className="space-y-4">
-            <div className="bg-gray-50 p-4 rounded-lg max-h-96 overflow-y-auto">
-              <pre className="whitespace-pre-wrap text-sm text-gray-800 font-mono">
+            <div className="bg-gradient-to-br from-rose-50 to-pink-50 p-6 rounded-lg max-h-96 overflow-y-auto border border-pink-200">
+              <pre className="whitespace-pre-wrap text-sm text-gray-800 font-mono leading-relaxed">
                 {script}
               </pre>
             </div>
@@ -35,10 +44,23 @@ const ScriptPreview = ({ script, coupleNames, ceremonyType }: ScriptPreviewProps
           </div>
         ) : (
           <div className="text-center py-12">
-            <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-500">
+            <div className="relative mb-6">
+              <div className="w-24 h-24 mx-auto bg-gradient-to-br from-pink-100 to-purple-100 rounded-full flex items-center justify-center">
+                <FileText className="h-12 w-12 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600" />
+              </div>
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xl">✨</span>
+              </div>
+            </div>
+            <p className="text-gray-500 mb-4">
               Fill out the form and click "Generate Custom Script" to see your personalized ceremony script here.
             </p>
+            <div className="flex justify-center space-x-4 text-2xl opacity-50">
+              <span>💒</span>
+              <span>💍</span>
+              <span>💐</span>
+              <span>💕</span>
+            </div>
           </div>
         )}
       </CardContent>
