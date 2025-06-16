@@ -53,9 +53,14 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            © 2024 CeremonyPro. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <p className="text-gray-400 text-sm">
+              © 2024 CeremonyPro. All rights reserved.
+            </p>
+            <p className="text-gray-500 text-sm">
+              Powered by <span className="text-blue-400 font-medium">Glowstar Labs</span>
+            </p>
+          </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
