@@ -32,17 +32,21 @@ const Index = () => {
 
   const handleOnboardingComplete = (data: OnboardingData) => {
     console.log('Onboarding completed with data:', data);
-    setUserPreferences(data);
-    setHasCompletedOnboarding(true);
     
-    // Store in localStorage to persist across sessions
+    // Store in localStorage first
     localStorage.setItem('onboarding_completed', 'true');
     localStorage.setItem('user_preferences', JSON.stringify(data));
+    
+    // Then update state
+    setUserPreferences(data);
+    setHasCompletedOnboarding(true);
     
     toast({
       title: "Setup Complete!",
       description: "Your officiant toolkit has been customized.",
     });
+    
+    console.log('Onboarding state updated - hasCompletedOnboarding: true');
   };
 
   // Check for success/canceled parameters
@@ -101,38 +105,41 @@ const Index = () => {
     return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
   }
 
-  // Determine if we should show onboarding
+  // Show onboarding if user is authenticated and hasn't completed it
   const shouldShowOnboarding = user && !hasCompletedOnboarding;
 
   console.log('Rendering Index - shouldShowOnboarding:', shouldShowOnboarding, 'user:', !!user, 'hasCompletedOnboarding:', hasCompletedOnboarding);
 
+  // Force re-render by explicitly checking the condition
+  if (shouldShowOnboarding) {
+    return (
+      <div className="min-h-screen bg-white">
+        <OnboardingQuiz onComplete={handleOnboardingComplete} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
-      {shouldShowOnboarding ? (
-        <OnboardingQuiz onComplete={handleOnboardingComplete} />
-      ) : (
-        <>
-          <Header onAuthClick={() => setShowAuthModal(true)} />
-          <HeroSection onAuthClick={() => setShowAuthModal(true)} />
-          
-          {/* Premium Features Section */}
-          {!user && <SubscriptionPlans />}
-          
-          <ScriptGenerator userPreferences={userPreferences} />
-          <ScriptLibrary />
-          <LegalGuide userState={userPreferences?.state} />
-          <CeremonyChecklist />
-          <ToolsSection />
-          
-          {/* Reviews and Social Proof */}
-          <ReviewsSection />
-          
-          {/* Show subscription plans for authenticated users */}
-          {user && <SubscriptionPlans />}
-          
-          <Footer />
-        </>
-      )}
+      <Header onAuthClick={() => setShowAuthModal(true)} />
+      <HeroSection onAuthClick={() => setShowAuthModal(true)} />
+      
+      {/* Premium Features Section */}
+      {!user && <SubscriptionPlans />}
+      
+      <ScriptGenerator userPreferences={userPreferences} />
+      <ScriptLibrary />
+      <LegalGuide userState={userPreferences?.state} />
+      <CeremonyChecklist />
+      <ToolsSection />
+      
+      {/* Reviews and Social Proof */}
+      <ReviewsSection />
+      
+      {/* Show subscription plans for authenticated users */}
+      {user && <SubscriptionPlans />}
+      
+      <Footer />
       
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
