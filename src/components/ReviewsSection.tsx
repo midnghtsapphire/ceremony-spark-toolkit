@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star, Download, Users, Award, Quote } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -14,39 +13,39 @@ const ReviewsSection = () => {
 
   const reviews = [
     {
-      name: "Rev. Sarah Mitchell",
+      name: "Sarah Mitchell",
       role: "Wedding Officiant",
       location: "California",
       rating: 5,
       text: "WeddingOfficiantBot has transformed my ceremony preparation process. The AI-generated scripts are incredibly personalized and professional. I've officiated over 200 weddings using this platform, and couples are always amazed by the quality.",
-      avatar: "/placeholder.svg",
+      avatar: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=150&h=150&fit=crop&crop=face",
       ceremonies: "200+ ceremonies"
     },
     {
-      name: "Pastor Michael Chen",
+      name: "Michael Chen",
       role: "Ministry Leader",
       location: "Texas",
       rating: 5,
       text: "The legal compliance features saved me countless hours of research. As someone who officiates in multiple states, having all the marriage requirements in one place is invaluable. This is the most comprehensive officiant tool I've ever used.",
-      avatar: "/placeholder.svg",
+      avatar: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=150&h=150&fit=crop&crop=face",
       ceremonies: "150+ ceremonies"
     },
     {
-      name: "Dr. Amanda Rodriguez",
+      name: "Amanda Rodriguez",
       role: "Wedding Celebrant",
       location: "Florida",
       rating: 5,
       text: "What sets WeddingOfficiantBot apart is the variety of script styles. Whether it's a traditional church wedding or a beach ceremony, the AI adapts perfectly to each couple's vision. My clients consistently praise the personalized touch.",
-      avatar: "/placeholder.svg",
+      avatar: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=150&h=150&fit=crop&crop=face",
       ceremonies: "180+ ceremonies"
     },
     {
-      name: "Rev. James Thompson",
+      name: "James Thompson",
       role: "Ordained Minister",
       location: "New York",
       rating: 5,
       text: "I was skeptical about AI-generated content, but WeddingOfficiantBot exceeded all expectations. The scripts feel authentic and heartfelt. The ceremony checklist feature ensures I never miss important details. Absolutely essential for any serious officiant.",
-      avatar: "/placeholder.svg",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       ceremonies: "300+ ceremonies"
     },
     {
@@ -55,16 +54,16 @@ const ReviewsSection = () => {
       location: "Washington",
       rating: 5,
       text: "As a wedding planner, I recommend WeddingOfficiantBot to all the officiants I work with. The professional tools and resources make ceremony planning seamless. The couples love the personalized scripts, and officiants appreciate the legal guidance.",
-      avatar: "/placeholder.svg",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
       ceremonies: "100+ weddings planned"
     },
     {
-      name: "Rev. David Kim",
+      name: "David Kim",
       role: "Interfaith Minister",
       location: "Oregon",
       rating: 5,
       text: "The cultural sensitivity and variety of ceremony types available is remarkable. I've used WeddingOfficiantBot for Christian, Jewish, Hindu, and secular ceremonies. Each script respects the traditions while adding personal touches.",
-      avatar: "/placeholder.svg",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
       ceremonies: "120+ ceremonies"
     }
   ];
