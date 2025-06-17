@@ -25,13 +25,13 @@ const Header = ({ onAuthClick }: HeaderProps) => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
               <img 
-                src="/lovable-uploads/ad067bb4-29f4-49d1-833c-2b130bafd091.png" 
-                alt="Officiantbot Logo" 
+                src="/lovable-uploads/35d2b96f-0f92-478c-9568-d5c31acb116c.png" 
+                alt="EverUnity Church Logo" 
                 className="h-10 w-auto"
               />
               <div>
                 <div className="text-xl font-bold text-gray-900">Officiantbot</div>
-                <div className="text-sm text-gray-600">EverUnity Church</div>
+                <div className="text-sm text-gray-600">Lovingly provided by EverUnity Church</div>
               </div>
             </Link>
             {subscribed && (

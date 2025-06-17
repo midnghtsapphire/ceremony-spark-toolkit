@@ -11,40 +11,55 @@ export type Database = {
     Tables: {
       products: {
         Row: {
+          botanical_ingredients: string[] | null
           category: string | null
           created_at: string
           description: string | null
           featured: boolean | null
+          flower_type: string | null
           id: string
           image_url: string | null
           in_stock: boolean | null
           name: string
           price: number
+          product_type: string | null
+          skin_benefits: string[] | null
           updated_at: string
+          usage_instructions: string | null
         }
         Insert: {
+          botanical_ingredients?: string[] | null
           category?: string | null
           created_at?: string
           description?: string | null
           featured?: boolean | null
+          flower_type?: string | null
           id?: string
           image_url?: string | null
           in_stock?: boolean | null
           name: string
           price: number
+          product_type?: string | null
+          skin_benefits?: string[] | null
           updated_at?: string
+          usage_instructions?: string | null
         }
         Update: {
+          botanical_ingredients?: string[] | null
           category?: string | null
           created_at?: string
           description?: string | null
           featured?: boolean | null
+          flower_type?: string | null
           id?: string
           image_url?: string | null
           in_stock?: boolean | null
           name?: string
           price?: number
+          product_type?: string | null
+          skin_benefits?: string[] | null
           updated_at?: string
+          usage_instructions?: string | null
         }
         Relationships: []
       }
