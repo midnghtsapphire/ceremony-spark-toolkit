@@ -199,7 +199,7 @@ const ScriptLibrary = () => {
                 </div>
                 <Button 
                   onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600"
+                  className="bg-primary hover:bg-primary/90"
                 >
                   Upgrade WeddingOfficiantBot for Full Access
                 </Button>
