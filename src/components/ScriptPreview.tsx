@@ -78,15 +78,15 @@ const ScriptPreview = ({ script, coupleNames, ceremonyType, isSubscribed }: Scri
             </div>
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={handleCopyScript}>
+            <Button variant="outline" size="sm" onClick={handleCopyScript} className="hover:bg-amber-50 hover:border-amber-200">
               <Copy className="h-4 w-4" />
             </Button>
             {isSubscribed && (
               <>
-                <Button variant="outline" size="sm" onClick={handleDownload}>
+                <Button variant="outline" size="sm" onClick={handleDownload} className="hover:bg-amber-50 hover:border-amber-200">
                   <Download className="h-4 w-4" />
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="hover:bg-amber-50 hover:border-amber-200">
                   <Share2 className="h-4 w-4" />
                 </Button>
               </>

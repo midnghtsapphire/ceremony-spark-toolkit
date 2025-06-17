@@ -31,16 +31,16 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             {!user ? (
               <>
-                <Button size="lg" onClick={onAuthClick}>
+                <Button size="lg" onClick={onAuthClick} className="bg-amber-600 hover:bg-amber-700">
                   Start Your Officiant Journey
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="hover:bg-amber-50 hover:border-amber-200">
                   View Wedding Scripts Demo
                 </Button>
               </>
             ) : (
-              <Button size="lg" onClick={() => document.getElementById('scripts')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button size="lg" onClick={() => document.getElementById('scripts')?.scrollIntoView({ behavior: 'smooth' })} className="bg-amber-600 hover:bg-amber-700">
                 Create Wedding Ceremony Script
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
