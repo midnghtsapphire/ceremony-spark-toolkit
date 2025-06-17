@@ -26,12 +26,12 @@ const Header = ({ onAuthClick }: HeaderProps) => {
             <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
               <img 
                 src="/lovable-uploads/ad067bb4-29f4-49d1-833c-2b130bafd091.png" 
-                alt="EverUnity Church Logo" 
+                alt="Officiantbot Logo" 
                 className="h-10 w-auto"
               />
               <div>
-                <div className="text-xl font-bold text-gray-900">EverUnity Church</div>
-                <div className="text-sm text-gray-600">Officiantbot</div>
+                <div className="text-xl font-bold text-gray-900">Officiantbot</div>
+                <div className="text-sm text-gray-600">EverUnity Church</div>
               </div>
             </Link>
             {subscribed && (
@@ -66,7 +66,6 @@ const Header = ({ onAuthClick }: HeaderProps) => {
           <div className="flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-700">{user.email}</span>
                 {isAdmin && (
                   <Link to="/admin">
                     <Button variant="outline" size="sm">
