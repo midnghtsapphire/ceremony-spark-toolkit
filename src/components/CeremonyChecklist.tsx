@@ -1,181 +1,169 @@
 
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Calendar, CheckCircle, Clock, Users } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
+import { CheckCircle, Users, Calendar, FileText, Printer, Save } from 'lucide-react';
+
+interface ChecklistItem {
+  id: string;
+  task: string;
+  phase: string;
+  category: 'pre-ceremony' | 'ceremony' | 'post-ceremony';
+}
+
+const checklistItems: ChecklistItem[] = [
+  // Pre-ceremony
+  { id: '1', task: 'Meet with couple for ceremony consultation', phase: 'Pre-ceremony', category: 'pre-ceremony' },
+  { id: '2', task: 'Review marriage license requirements', phase: 'Pre-ceremony', category: 'pre-ceremony' },
+  { id: '3', task: 'Confirm ceremony date, time, and location', phase: 'Pre-ceremony', category: 'pre-ceremony' },
+  { id: '4', task: 'Prepare ceremony script and vows', phase: 'Pre-ceremony', category: 'pre-ceremony' },
+  { id: '5', task: 'Rehearse ceremony (if scheduled)', phase: 'Pre-ceremony', category: 'pre-ceremony' },
+  
+  // During ceremony
+  { id: '6', task: 'Begin with welcome and opening remarks', phase: 'Opening', category: 'ceremony' },
+  { id: '7', task: 'Guide through declaration of intent', phase: 'Mid-ceremony', category: 'ceremony' },
+  { id: '8', task: 'Facilitate ring exchange (if applicable)', phase: 'Mid-ceremony', category: 'ceremony' },
+  { id: '9', task: 'Pronounce couple as married', phase: 'Closing', category: 'ceremony' },
+  { id: '10', task: 'Present the newly married couple', phase: 'Closing', category: 'ceremony' },
+  
+  // Post-ceremony
+  { id: '11', task: 'Ensure witness signatures are collected', phase: 'Immediately after', category: 'post-ceremony' },
+  { id: '12', task: 'Take photos with the couple (if requested)', phase: 'After ceremony', category: 'post-ceremony' },
+  { id: '13', task: 'File marriage license with appropriate office', phase: 'Within deadline', category: 'post-ceremony' },
+  { id: '14', task: 'Send congratulations note to couple', phase: 'Within 1 week', category: 'post-ceremony' }
+];
 
 const CeremonyChecklist = () => {
-  const [checkedItems, setCheckedItems] = useState({});
+  const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
+  const [currentCategory, setCurrentCategory] = useState<'pre-ceremony' | 'ceremony' | 'post-ceremony'>('pre-ceremony');
 
-  const handleCheck = (itemId) => {
-    setCheckedItems(prev => ({
-      ...prev,
-      [itemId]: !prev[itemId]
-    }));
-  };
-
-  const checklistSections = [
-    {
-      id: 'preparation',
-      title: 'Pre-Ceremony Preparation',
-      icon: Calendar,
-      color: 'blue',
-      items: [
-        { id: 'prep-1', text: 'Review ceremony script and practice delivery', timing: '1 week before' },
-        { id: 'prep-2', text: 'Confirm ceremony details with couple', timing: '3 days before' },
-        { id: 'prep-3', text: 'Prepare marriage license and required documents', timing: '1 day before' },
-        { id: 'prep-4', text: 'Plan arrival time and transportation to venue', timing: '1 day before' },
-        { id: 'prep-5', text: 'Prepare backup script copies and cue cards', timing: '1 day before' }
-      ]
-    },
-    {
-      id: 'arrival',
-      title: 'Day of Ceremony - Arrival',
-      icon: Clock,
-      color: 'green',
-      items: [
-        { id: 'arr-1', text: 'Arrive 30-45 minutes early', timing: 'Before ceremony' },
-        { id: 'arr-2', text: 'Check microphone and sound system', timing: 'Before ceremony' },
-        { id: 'arr-3', text: 'Review seating arrangement and processional plan', timing: 'Before ceremony' },
-        { id: 'arr-4', text: 'Meet with wedding coordinator or planner', timing: 'Before ceremony' },
-        { id: 'arr-5', text: 'Have final check-in with couple', timing: 'Before ceremony' }
-      ]
-    },
-    {
-      id: 'ceremony',
-      title: 'During the Ceremony',
-      icon: Users,
-      color: 'purple',
-      items: [
-        { id: 'cer-1', text: 'Begin with welcome and opening remarks', timing: 'Opening' },
-        { id: 'cer-2', text: 'Guide through declaration of intent', timing: 'Mid-ceremony' },
-        { id: 'cer-3', text: 'Facilitate ring exchange (if applicable)', timing: 'Mid-ceremony' },
-        { id: 'cer-4', text: 'Pronounce couple as married', timing: 'Closing' },
-        { id: 'cer-5', text: 'Present the newly married couple', timing: 'Closing' }
-      ]
-    },
-    {
-      id: 'completion',
-      title: 'Post-Ceremony Tasks',
-      icon: CheckCircle,
-      color: 'amber',
-      items: [
-        { id: 'post-1', text: 'Complete and sign marriage certificate', timing: 'Immediately after' },
-        { id: 'post-2', text: 'Ensure witness signatures are collected', timing: 'Immediately after' },
-        { id: 'post-3', text: 'Take photos with the couple (if requested)', timing: 'After ceremony' },
-        { id: 'post-4', text: 'File marriage license with appropriate office', timing: 'Within deadline' },
-        { id: 'post-5', text: 'Send congratulations note to couple', timing: 'Within 1 week' }
-      ]
+  const handleItemCheck = (itemId: string) => {
+    const newCheckedItems = new Set(checkedItems);
+    if (newCheckedItems.has(itemId)) {
+      newCheckedItems.delete(itemId);
+    } else {
+      newCheckedItems.add(itemId);
     }
-  ];
-
-  const getIconColor = (color) => {
-    const colors = {
-      blue: 'text-blue-600',
-      green: 'text-green-600',
-      purple: 'text-purple-600',
-      amber: 'text-amber-600'
-    };
-    return colors[color] || 'text-gray-600';
+    setCheckedItems(newCheckedItems);
   };
 
-  const getBadgeColor = (color) => {
-    const colors = {
-      blue: 'bg-blue-100 text-blue-800',
-      green: 'bg-green-100 text-green-800',
-      purple: 'bg-purple-100 text-purple-800',
-      amber: 'bg-amber-100 text-amber-800'
-    };
-    return colors[color] || 'bg-gray-100 text-gray-800';
+  const getCategoryTitle = (category: string) => {
+    switch (category) {
+      case 'pre-ceremony': return 'Before the Ceremony';
+      case 'ceremony': return 'During the Ceremony';
+      case 'post-ceremony': return 'After the Ceremony';
+      default: return category;
+    }
   };
 
-  const totalItems = checklistSections.reduce((sum, section) => sum + section.items.length, 0);
-  const completedItems = Object.values(checkedItems).filter(Boolean).length;
-  const completionPercentage = Math.round((completedItems / totalItems) * 100);
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'pre-ceremony': return <Calendar className="h-5 w-5" />;
+      case 'ceremony': return <Users className="h-5 w-5" />;
+      case 'post-ceremony': return <FileText className="h-5 w-5" />;
+      default: return <CheckCircle className="h-5 w-5" />;
+    }
+  };
+
+  const filteredItems = checklistItems.filter(item => item.category === currentCategory);
+  const completedCount = filteredItems.filter(item => checkedItems.has(item.id)).length;
+  const totalCount = filteredItems.length;
 
   return (
-    <section id="checklist" className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="checklist" className="py-16 bg-gradient-to-br from-amber-50 to-orange-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Ceremony Day Checklist</h2>
-          <p className="text-lg text-gray-600">Step-by-step guide to ensure everything goes smoothly</p>
-          
-          <div className="mt-6 bg-gray-50 rounded-lg p-4 max-w-md mx-auto">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-900">Progress</span>
-              <span className="text-sm text-gray-600">{completedItems}/{totalItems} completed</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${completionPercentage}%` }}
-              ></div>
-            </div>
-            <p className="text-xs text-gray-500 mt-1">{completionPercentage}% complete</p>
-          </div>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Wedding Officiant Ceremony Checklist</h2>
+          <p className="text-lg text-gray-600">Stay organized with our comprehensive checklist for wedding officiants</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {checklistSections.map((section) => {
-            const IconComponent = section.icon;
-            return (
-              <Card key={section.id} className="h-fit">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg bg-${section.color}-100`}>
-                      <IconComponent className={`h-5 w-5 ${getIconColor(section.color)}`} />
-                    </div>
-                    {section.title}
-                  </CardTitle>
-                  <CardDescription>
-                    Essential tasks for this phase of the ceremony
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {section.items.map((item) => (
-                      <div key={item.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                        <Checkbox
-                          id={item.id}
-                          checked={checkedItems[item.id] || false}
-                          onCheckedChange={() => handleCheck(item.id)}
-                          className="mt-1"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <label 
-                            htmlFor={item.id}
-                            className={`text-sm font-medium cursor-pointer block ${
-                              checkedItems[item.id] ? 'line-through text-gray-500' : 'text-gray-900'
-                            }`}
-                          >
-                            {item.text}
-                          </label>
-                          <Badge 
-                            variant="outline" 
-                            className={`mt-1 text-xs ${getBadgeColor(section.color)}`}
-                          >
-                            {item.timing}
-                          </Badge>
-                        </div>
-                      </div>
-                    ))}
+        <Card>
+          <CardHeader>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <CardTitle className="flex items-center gap-2 text-amber-800">
+                {getCategoryIcon(currentCategory)}
+                {getCategoryTitle(currentCategory)}
+              </CardTitle>
+              <div className="flex gap-2">
+                <Button
+                  variant={currentCategory === 'pre-ceremony' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setCurrentCategory('pre-ceremony')}
+                  className={currentCategory === 'pre-ceremony' ? 'bg-amber-600 hover:bg-amber-700' : 'hover:bg-amber-50'}
+                >
+                  Pre-ceremony
+                </Button>
+                <Button
+                  variant={currentCategory === 'ceremony' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setCurrentCategory('ceremony')}
+                  className={currentCategory === 'ceremony' ? 'bg-amber-600 hover:bg-amber-700' : 'hover:bg-amber-50'}
+                >
+                  Ceremony
+                </Button>
+                <Button
+                  variant={currentCategory === 'post-ceremony' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setCurrentCategory('post-ceremony')}
+                  className={currentCategory === 'post-ceremony' ? 'bg-amber-600 hover:bg-amber-700' : 'hover:bg-amber-50'}
+                >
+                  Post-ceremony
+                </Button>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <Badge variant="secondary" className="bg-amber-100 text-amber-800">
+                {completedCount}/{totalCount} completed
+              </Badge>
+              <div className="flex-1 bg-amber-100 rounded-full h-2">
+                <div 
+                  className="bg-amber-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${totalCount > 0 ? (completedCount / totalCount) * 100 : 0}%` }}
+                />
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {filteredItems.map((item) => (
+                <div key={item.id} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-amber-50 transition-colors">
+                  <Checkbox
+                    id={item.id}
+                    checked={checkedItems.has(item.id)}
+                    onCheckedChange={() => handleItemCheck(item.id)}
+                    className="mt-1"
+                  />
+                  <div className="flex-1">
+                    <label
+                      htmlFor={item.id}
+                      className={`block text-sm font-medium cursor-pointer ${
+                        checkedItems.has(item.id) ? 'text-gray-500 line-through' : 'text-gray-900'
+                      }`}
+                    >
+                      {item.task}
+                    </label>
+                    <Badge variant="outline" className="mt-1 text-xs border-amber-200 text-amber-700">
+                      {item.phase}
+                    </Badge>
                   </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Button size="lg" variant="outline" className="mr-4">
-            Print Checklist
-          </Button>
-          <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-            Save Progress
-          </Button>
-        </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-6 border-t border-amber-200">
+              <Button variant="outline" className="flex-1 hover:bg-amber-50">
+                <Printer className="h-4 w-4 mr-2" />
+                Print Checklist
+              </Button>
+              <Button className="flex-1 bg-amber-600 hover:bg-amber-700">
+                <Save className="h-4 w-4 mr-2" />
+                Save Progress
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

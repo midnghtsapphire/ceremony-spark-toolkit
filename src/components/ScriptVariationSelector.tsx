@@ -1,14 +1,14 @@
 
 import React from 'react';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Shuffle, Sparkles } from 'lucide-react';
-import { getVariationsByType } from '@/utils/scriptVariations';
+import { getScriptVariations } from '@/utils/scriptVariations';
 
 interface ScriptVariationSelectorProps {
   ceremonyType: string;
-  selectedVariation?: string;
+  selectedVariation: string;
   onVariationSelect: (variationId: string) => void;
   onGenerateAnother: () => void;
 }
@@ -19,56 +19,68 @@ const ScriptVariationSelector = ({
   onVariationSelect, 
   onGenerateAnother 
 }: ScriptVariationSelectorProps) => {
-  const variations = getVariationsByType(ceremonyType);
+  const variations = getScriptVariations(ceremonyType);
 
-  if (!ceremonyType || variations.length === 0) {
+  if (!variations || variations.length === 0) {
     return null;
   }
 
   return (
-    <Card className="border-blue-200 bg-blue-50/30">
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-blue-600" />
-            <CardTitle className="text-lg">Choose Your Script Style</CardTitle>
-          </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={onGenerateAnother}
-            className="gap-2"
-          >
-            <Shuffle className="h-4 w-4" />
-            Generate Another
-          </Button>
-        </div>
-        <CardDescription>
-          Select a ceremony style that matches your couple's personality and wedding vision
-        </CardDescription>
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-amber-800">
+          <Sparkles className="h-5 w-5" />
+          Script Variations
+        </CardTitle>
+        <p className="text-sm text-gray-600">
+          Choose a style variation for your ceremony script
+        </p>
       </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 gap-3">
+      <CardContent className="space-y-4">
+        <div className="grid gap-2">
           {variations.map((variation) => (
-            <div
+            <Button
               key={variation.id}
-              className={`p-3 rounded-lg border cursor-pointer transition-all ${
-                selectedVariation === variation.id
-                  ? 'border-blue-500 bg-blue-100/50 shadow-sm'
-                  : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50/30'
+              variant={selectedVariation === variation.id ? "default" : "outline"}
+              className={`justify-start h-auto p-3 ${
+                selectedVariation === variation.id 
+                  ? "bg-amber-600 hover:bg-amber-700 text-white" 
+                  : "hover:bg-amber-50 hover:border-amber-200"
               }`}
               onClick={() => onVariationSelect(variation.id)}
             >
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-gray-900">{variation.name}</h4>
-                <Badge variant={selectedVariation === variation.id ? "default" : "secondary"}>
-                  {variation.tone}
-                </Badge>
+              <div className="text-left">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-medium">{variation.name}</span>
+                  <Badge 
+                    variant="secondary" 
+                    className={`text-xs ${
+                      selectedVariation === variation.id 
+                        ? "bg-amber-500 text-white" 
+                        : "bg-amber-100 text-amber-800"
+                    }`}
+                  >
+                    {variation.tone}
+                  </Badge>
+                </div>
+                <p className={`text-sm ${
+                  selectedVariation === variation.id ? "text-amber-100" : "text-gray-600"
+                }`}>
+                  {variation.description}
+                </p>
               </div>
-              <p className="text-sm text-gray-600">{variation.description}</p>
-            </div>
+            </Button>
           ))}
         </div>
+        
+        <Button 
+          onClick={onGenerateAnother} 
+          variant="outline" 
+          className="w-full hover:bg-amber-50 hover:border-amber-200"
+        >
+          <Shuffle className="h-4 w-4 mr-2" />
+          Generate Another Variation
+        </Button>
       </CardContent>
     </Card>
   );
