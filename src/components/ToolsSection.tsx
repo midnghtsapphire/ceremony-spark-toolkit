@@ -12,7 +12,7 @@ const ToolsSection = () => {
       title: 'Public Speaking Guide',
       description: 'Tips for confident delivery, voice projection, and handling nerves',
       icon: Mic,
-      color: 'blue',
+      color: 'amber',
       features: ['Voice exercises', 'Pacing techniques', 'Microphone usage', 'Crowd engagement'],
       available: true
     },
@@ -21,7 +21,7 @@ const ToolsSection = () => {
       title: 'Emergency Script Prompts',
       description: 'Quick phrases for when you blank out or need to improvise',
       icon: MessageSquare,
-      color: 'red',
+      color: 'orange',
       features: ['Transitional phrases', 'Filler content', 'Recovery techniques', 'Backup vows'],
       available: true
     },
@@ -30,7 +30,7 @@ const ToolsSection = () => {
       title: 'AI Personalization Assistant',
       description: 'Enhance your scripts with AI suggestions for tone and style',
       icon: Heart,
-      color: 'purple',
+      color: 'amber',
       features: ['Emotional tone', 'Humor injection', 'Length adjustment', 'Cultural adaptation'],
       available: false
     },
@@ -39,7 +39,7 @@ const ToolsSection = () => {
       title: 'Mobile Ceremony Flow',
       description: 'Phone-friendly ceremony guide for easy altar reference',
       icon: Calendar,
-      color: 'green',
+      color: 'orange',
       features: ['Large text', 'Swipe navigation', 'Bookmark sections', 'Offline access'],
       available: true
     },
@@ -48,7 +48,7 @@ const ToolsSection = () => {
       title: 'Viral Toast Templates',
       description: 'Popular and trending ceremony elements and social media content',
       icon: FileText,
-      color: 'orange',
+      color: 'amber',
       features: ['TikTok trends', 'Instagram captions', 'Memorable moments', 'Photo prompts'],
       available: false
     },
@@ -57,7 +57,7 @@ const ToolsSection = () => {
       title: 'Certificate Generator',
       description: 'Create beautiful marriage certificates and keepsake documents',
       icon: Download,
-      color: 'indigo',
+      color: 'orange',
       features: ['Custom designs', 'Digital signatures', 'Print-ready PDF', 'Couple branding'],
       available: true
     }
@@ -65,24 +65,16 @@ const ToolsSection = () => {
 
   const getIconColor = (color) => {
     const colors = {
-      blue: 'text-blue-600',
-      red: 'text-red-600',
-      purple: 'text-purple-600',
-      green: 'text-green-600',
-      orange: 'text-orange-600',
-      indigo: 'text-indigo-600'
+      amber: 'text-amber-600',
+      orange: 'text-orange-600'
     };
     return colors[color] || 'text-gray-600';
   };
 
   const getBgColor = (color) => {
     const colors = {
-      blue: 'bg-blue-100',
-      red: 'bg-red-100',
-      purple: 'bg-purple-100',
-      green: 'bg-green-100',
-      orange: 'bg-orange-100',
-      indigo: 'bg-indigo-100'
+      amber: 'bg-amber-100',
+      orange: 'bg-orange-100'
     };
     return colors[color] || 'bg-gray-100';
   };
@@ -139,17 +131,17 @@ const ToolsSection = () => {
           })}
         </div>
 
-        <div className="mt-12 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 text-center">
+        <div className="mt-12 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 text-center">
           <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Officiate Your First Wedding?</h3>
           <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
             Join thousands of officiants who trust our toolkit for their most important ceremonies. 
             Start creating memorable moments today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8">
+            <Button size="lg" className="bg-amber-600 hover:bg-amber-700 px-8">
               Start Free Trial
             </Button>
-            <Button variant="outline" size="lg" className="px-8">
+            <Button variant="outline" size="lg" className="px-8 hover:bg-amber-50 hover:border-amber-200">
               View Pricing
             </Button>
           </div>

@@ -6,10 +6,10 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const ReviewsSection = () => {
   const stats = [
-    { icon: Download, label: 'Downloads', value: '50,000+', color: 'text-blue-600' },
-    { icon: Users, label: 'Active Officiants', value: '12,500+', color: 'text-green-600' },
-    { icon: Award, label: 'Ceremonies Completed', value: '25,000+', color: 'text-purple-600' },
-    { icon: Star, label: 'Average Rating', value: '4.9/5', color: 'text-yellow-600' }
+    { icon: Download, label: 'Downloads', value: '50,000+', color: 'text-amber-600' },
+    { icon: Users, label: 'Active Officiants', value: '12,500+', color: 'text-amber-600' },
+    { icon: Award, label: 'Ceremonies Completed', value: '25,000+', color: 'text-amber-600' },
+    { icon: Star, label: 'Average Rating', value: '4.9/5', color: 'text-amber-600' }
   ];
 
   const reviews = [
@@ -119,7 +119,7 @@ const ReviewsSection = () => {
                   <div className="flex items-start space-x-4 mb-4">
                     <Avatar className="h-12 w-12">
                       <AvatarImage src={review.avatar} alt={review.name} />
-                      <AvatarFallback className="bg-blue-100 text-blue-600">
+                      <AvatarFallback className="bg-amber-100 text-amber-600">
                         {review.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
@@ -133,11 +133,11 @@ const ReviewsSection = () => {
                     </div>
                   </div>
                   
-                  <Quote className="h-5 w-5 text-blue-600 mb-2" />
+                  <Quote className="h-5 w-5 text-amber-600 mb-2" />
                   <p className="text-gray-700 text-sm leading-relaxed mb-4">{review.text}</p>
                   
                   <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                    <span className="bg-amber-100 text-amber-800 px-2 py-1 rounded-full">
                       {review.ceremonies}
                     </span>
                     <span>Verified Officiant</span>
@@ -157,12 +157,12 @@ const ReviewsSection = () => {
               <div className="text-sm text-gray-500 mt-1">Based on 5,000+ reviews</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-blue-600 mb-2">24/7</div>
+              <div className="text-2xl font-bold text-amber-600 mb-2">24/7</div>
               <div className="text-gray-600">Expert Support</div>
               <div className="text-sm text-gray-500 mt-1">Professional officiant assistance</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-purple-600 mb-2">50 States</div>
+              <div className="text-2xl font-bold text-amber-600 mb-2">50 States</div>
               <div className="text-gray-600">Legal Compliance</div>
               <div className="text-sm text-gray-500 mt-1">Updated marriage requirements</div>
             </div>
