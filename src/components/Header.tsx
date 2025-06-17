@@ -42,7 +42,7 @@ const Header = ({ onAuthClick }: HeaderProps) => {
                   onClick={handleLogoClick}
                 />
                 <div>
-                  <div className="text-lg font-bold text-gray-900">WeddingOfficiantBot</div>
+                  <div className="text-base font-bold text-gray-900">WeddingOfficiantBot</div>
                   <div className="text-sm text-gray-600">Lovingly provided by EverUnity Church</div>
                 </div>
               </Link>
