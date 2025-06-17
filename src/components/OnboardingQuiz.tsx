@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { MapPin, Users, Clock, Heart } from 'lucide-react';
+import { MapPin, Users, Clock, Heart, CheckCircle } from 'lucide-react';
 import { ceremonyTypes } from '@/data/ceremonyTypes';
 
 interface OnboardingData {
@@ -41,6 +42,7 @@ const OnboardingQuiz = ({ onComplete }: OnboardingQuizProps) => {
     if (step < 4) {
       setStep(step + 1);
     } else {
+      console.log('Completing onboarding with data:', formData);
       onComplete(formData);
     }
   };
@@ -190,7 +192,14 @@ const OnboardingQuiz = ({ onComplete }: OnboardingQuizProps) => {
               disabled={!isStepValid()}
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
             >
-              {step === 4 ? 'Complete Setup' : 'Next'}
+              {step === 4 ? (
+                <>
+                  <CheckCircle className="h-4 w-4 mr-2" />
+                  Complete Setup
+                </>
+              ) : (
+                'Next'
+              )}
             </Button>
           </div>
         </CardContent>

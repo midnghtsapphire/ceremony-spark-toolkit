@@ -26,17 +26,23 @@ const Index = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [userPreferences, setUserPreferences] = useState<OnboardingData | null>(null);
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
-  const { user, subscribed, loading } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const { user, subscribed, loading: authLoading } = useAuth();
   const { toast } = useToast();
 
   const handleOnboardingComplete = (data: OnboardingData) => {
     console.log('Onboarding completed with data:', data);
     setUserPreferences(data);
     setHasCompletedOnboarding(true);
+    
     // Store in localStorage to persist across sessions
     localStorage.setItem('onboarding_completed', 'true');
     localStorage.setItem('user_preferences', JSON.stringify(data));
+    
+    toast({
+      title: "Setup Complete!",
+      description: "Your officiant toolkit has been customized.",
+    });
   };
 
   // Check for success/canceled parameters
@@ -60,31 +66,38 @@ const Index = () => {
     }
   }, [toast]);
 
-  // Initialize onboarding state once on mount
+  // Initialize onboarding state
   useEffect(() => {
-    const completedOnboarding = localStorage.getItem('onboarding_completed') === 'true';
-    const savedPreferences = localStorage.getItem('user_preferences');
-    
-    console.log('Initializing onboarding state - completedOnboarding:', completedOnboarding);
-    
-    if (completedOnboarding && savedPreferences) {
+    const initializeApp = () => {
       try {
-        const preferences = JSON.parse(savedPreferences);
-        setUserPreferences(preferences);
-        setHasCompletedOnboarding(true);
-        console.log('Loaded saved preferences:', preferences);
+        const completedOnboarding = localStorage.getItem('onboarding_completed') === 'true';
+        const savedPreferences = localStorage.getItem('user_preferences');
+        
+        console.log('Initializing app - completedOnboarding:', completedOnboarding);
+        
+        if (completedOnboarding && savedPreferences) {
+          const preferences = JSON.parse(savedPreferences);
+          setUserPreferences(preferences);
+          setHasCompletedOnboarding(true);
+          console.log('Loaded saved preferences:', preferences);
+        }
       } catch (error) {
-        console.error('Error parsing saved preferences:', error);
+        console.error('Error initializing app:', error);
         // Clear invalid data
         localStorage.removeItem('onboarding_completed');
         localStorage.removeItem('user_preferences');
+      } finally {
+        setLoading(false);
       }
-    }
-    
-    setIsInitialized(true);
-  }, []);
+    };
 
-  if (loading || !isInitialized) {
+    // Wait for auth to be ready
+    if (!authLoading) {
+      initializeApp();
+    }
+  }, [authLoading]);
+
+  if (authLoading || loading) {
     return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
   }
 
