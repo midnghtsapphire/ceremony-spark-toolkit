@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { User, LogOut, Settings } from 'lucide-react';
@@ -24,7 +25,7 @@ const Header = ({ onAuthClick }: HeaderProps) => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
               <img 
-                src="/lovable-uploads/d7aa16b8-3a3c-4c5a-a68c-af9c8e8cd7c1.png" 
+                src="/lovable-uploads/ad067bb4-29f4-49d1-833c-2b130bafd091.png" 
                 alt="EverUnity Church Logo" 
                 className="h-10 w-auto"
               />
