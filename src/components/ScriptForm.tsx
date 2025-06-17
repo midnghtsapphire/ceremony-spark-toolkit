@@ -65,19 +65,17 @@ const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscri
         <div className="space-y-3">
           <Label className="text-base font-medium">Choose Ceremony Type</Label>
           <p className="text-sm text-gray-600">Click to select and auto-generate</p>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {ceremonyTypes.map((type) => (
               <Button
                 key={type.value}
                 variant={formData.ceremonyType === type.value ? "default" : "outline"}
-                className="h-auto p-3 text-left justify-start"
+                className="h-auto p-3 text-left justify-start whitespace-normal min-h-[60px]"
                 onClick={() => handleCeremonyTypeClick(type.value)}
               >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span>{type.icon}</span>
-                    <span className="font-medium text-sm">{type.label}</span>
-                  </div>
+                <div className="flex items-start gap-2 w-full">
+                  <span className="text-lg flex-shrink-0">{type.icon}</span>
+                  <span className="font-medium text-sm break-words">{type.label}</span>
                 </div>
               </Button>
             ))}
@@ -85,7 +83,7 @@ const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscri
         </div>
 
         {/* Couple Names */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="couple1Name">Partner 1 Name</Label>
             <Input
@@ -132,6 +130,7 @@ const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscri
             value={formData.personalNotes}
             onChange={(e) => onFormChange('personalNotes', e.target.value)}
             rows={3}
+            className="resize-none"
           />
         </div>
 
@@ -145,12 +144,12 @@ const ScriptForm = ({ formData, onFormChange, onGenerate, canGenerate, isSubscri
           {!canGenerate ? (
             <>
               <Lock className="h-4 w-4 mr-2" />
-              Upgrade to Generate More Scripts
+              <span className="truncate">Upgrade to Generate More Scripts</span>
             </>
           ) : (
             <>
               <Heart className="h-4 w-4 mr-2" />
-              Generate Wedding Script
+              <span className="truncate">Generate Wedding Script</span>
             </>
           )}
         </Button>
