@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -181,8 +182,8 @@ const ScriptLibrary = () => {
             <Card className="max-w-2xl mx-auto bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
               <CardHeader>
                 <BookOpen className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                <CardTitle className="text-2xl">Unlock WeddingOfficiantBot's Complete Script Library</CardTitle>
-                <CardDescription className="text-lg">
+                <CardTitle className="text-xl">Unlock WeddingOfficiantBot's Complete Script Library</CardTitle>
+                <CardDescription className="text-base">
                   Get access to over 50 professional wedding ceremony scripts, including premium templates 
                   for specialized ceremonies, cultural traditions, and unique celebration styles.
                 </CardDescription>
@@ -197,7 +198,6 @@ const ScriptLibrary = () => {
                   <div>• Elopement scripts</div>
                 </div>
                 <Button 
-                  size="lg"
                   onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
                   className="bg-gradient-to-r from-blue-600 to-purple-600"
                 >
