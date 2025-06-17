@@ -42,7 +42,7 @@ const Header = ({ onAuthClick }: HeaderProps) => {
                   onClick={handleLogoClick}
                 />
                 <div>
-                  <div className="text-xl font-bold text-gray-900">WeddingOfficiantBot</div>
+                  <div className="text-lg font-bold text-gray-900">WeddingOfficiantBot</div>
                   <div className="text-sm text-gray-600">Lovingly provided by EverUnity Church</div>
                 </div>
               </Link>
@@ -86,10 +86,13 @@ const Header = ({ onAuthClick }: HeaderProps) => {
                       </Button>
                     </Link>
                   )}
-                  <Button variant="outline" size="sm" onClick={signOut}>
-                    <LogOut className="h-4 w-4 mr-1" />
-                    Sign Out
-                  </Button>
+                  <div className="flex flex-col items-end">
+                    <Button variant="outline" size="sm" onClick={signOut}>
+                      <LogOut className="h-4 w-4 mr-1" />
+                      Sign Out
+                    </Button>
+                    <span className="text-xs text-gray-500 mt-1">User logged in</span>
+                  </div>
                 </div>
               ) : (
                 <Button onClick={onAuthClick} variant="outline">

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Heart, Users, Award, X } from 'lucide-react';
@@ -38,9 +39,9 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
               EverUnity Church
               <br />
-              <span className="text-2xl md:text-3xl text-amber-700">Professional Wedding Officiant</span>
+              <span className="text-xl md:text-2xl text-amber-700">Professional Wedding Officiant</span>
               <br />
-              <span className="text-2xl md:text-3xl text-amber-700">AI Assistant</span>
+              <span className="text-xl md:text-2xl text-amber-700">AI Assistant</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               The complete AI-powered marriage officiant platform with intelligent wedding ceremony scripts, 

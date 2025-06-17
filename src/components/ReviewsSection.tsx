@@ -18,7 +18,7 @@ const ReviewsSection = () => {
       role: "Wedding Officiant",
       location: "California",
       rating: 5,
-      text: "Officiantbot has transformed my ceremony preparation process. The AI-generated scripts are incredibly personalized and professional. I've officiated over 200 weddings using this platform, and couples are always amazed by the quality.",
+      text: "WeddingOfficiantBot has transformed my ceremony preparation process. The AI-generated scripts are incredibly personalized and professional. I've officiated over 200 weddings using this platform, and couples are always amazed by the quality.",
       avatar: "/placeholder.svg",
       ceremonies: "200+ ceremonies"
     },
@@ -36,7 +36,7 @@ const ReviewsSection = () => {
       role: "Wedding Celebrant",
       location: "Florida",
       rating: 5,
-      text: "What sets Officiantbot apart is the variety of script styles. Whether it's a traditional church wedding or a beach ceremony, the AI adapts perfectly to each couple's vision. My clients consistently praise the personalized touch.",
+      text: "What sets WeddingOfficiantBot apart is the variety of script styles. Whether it's a traditional church wedding or a beach ceremony, the AI adapts perfectly to each couple's vision. My clients consistently praise the personalized touch.",
       avatar: "/placeholder.svg",
       ceremonies: "180+ ceremonies"
     },
@@ -45,7 +45,7 @@ const ReviewsSection = () => {
       role: "Ordained Minister",
       location: "New York",
       rating: 5,
-      text: "I was skeptical about AI-generated content, but Officiantbot exceeded all expectations. The scripts feel authentic and heartfelt. The ceremony checklist feature ensures I never miss important details. Absolutely essential for any serious officiant.",
+      text: "I was skeptical about AI-generated content, but WeddingOfficiantBot exceeded all expectations. The scripts feel authentic and heartfelt. The ceremony checklist feature ensures I never miss important details. Absolutely essential for any serious officiant.",
       avatar: "/placeholder.svg",
       ceremonies: "300+ ceremonies"
     },
@@ -54,7 +54,7 @@ const ReviewsSection = () => {
       role: "Wedding Coordinator",
       location: "Washington",
       rating: 5,
-      text: "As a wedding planner, I recommend Officiantbot to all the officiants I work with. The professional tools and resources make ceremony planning seamless. The couples love the personalized scripts, and officiants appreciate the legal guidance.",
+      text: "As a wedding planner, I recommend WeddingOfficiantBot to all the officiants I work with. The professional tools and resources make ceremony planning seamless. The couples love the personalized scripts, and officiants appreciate the legal guidance.",
       avatar: "/placeholder.svg",
       ceremonies: "100+ weddings planned"
     },
@@ -63,7 +63,7 @@ const ReviewsSection = () => {
       role: "Interfaith Minister",
       location: "Oregon",
       rating: 5,
-      text: "The cultural sensitivity and variety of ceremony types available is remarkable. I've used Officiantbot for Christian, Jewish, Hindu, and secular ceremonies. Each script respects the traditions while adding personal touches.",
+      text: "The cultural sensitivity and variety of ceremony types available is remarkable. I've used WeddingOfficiantBot for Christian, Jewish, Hindu, and secular ceremonies. Each script respects the traditions while adding personal touches.",
       avatar: "/placeholder.svg",
       ceremonies: "120+ ceremonies"
     }
@@ -90,7 +90,7 @@ const ReviewsSection = () => {
           </h2>
           <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
             Join thousands of certified ministers, wedding celebrants, and professional officiants 
-            who rely on Officiantbot for exceptional wedding ceremonies.
+            who rely on WeddingOfficiantBot for exceptional wedding ceremonies.
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -169,7 +169,7 @@ const ReviewsSection = () => {
           </div>
         </div>
 
-        {/* Featured in Section - Fixed */}
+        {/* Featured in Section */}
         <div className="mt-16 text-center">
           <h3 className="text-lg font-semibold text-gray-900 mb-8">Featured In</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
