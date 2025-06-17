@@ -17,7 +17,10 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             EverUnity Church
-            <span className="text-amber-700"> Professional Wedding Officiant AI Assistant</span>
+            <br />
+            <span className="text-2xl md:text-3xl text-amber-700">Professional Wedding Officiant</span>
+            <br />
+            <span className="text-2xl md:text-3xl text-amber-700">AI Assistant</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             The complete AI-powered marriage officiant platform with intelligent wedding ceremony scripts, 
