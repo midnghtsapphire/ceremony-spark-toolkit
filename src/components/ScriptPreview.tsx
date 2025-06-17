@@ -1,10 +1,9 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Download, Copy, Share2, Sparkles } from 'lucide-react';
-import { toast } from '@/components/ui/sonner';
+import { Sparkles } from 'lucide-react';
+import ScriptExporter from './ScriptExporter';
 
 interface ScriptPreviewProps {
   script: string;
@@ -14,26 +13,6 @@ interface ScriptPreviewProps {
 }
 
 const ScriptPreview = ({ script, coupleNames, ceremonyType, isSubscribed }: ScriptPreviewProps) => {
-  const handleCopyScript = () => {
-    if (script) {
-      navigator.clipboard.writeText(script);
-      toast('Script copied to clipboard!');
-    }
-  };
-
-  const handleDownload = () => {
-    if (script) {
-      const element = document.createElement('a');
-      const file = new Blob([script], { type: 'text/plain' });
-      element.href = URL.createObjectURL(file);
-      element.download = `wedding-script-${coupleNames.partner1}-${coupleNames.partner2}.txt`;
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-      toast('Script downloaded successfully!');
-    }
-  };
-
   if (!script) {
     return (
       <Card className="h-full" data-script-preview>
@@ -77,28 +56,22 @@ const ScriptPreview = ({ script, coupleNames, ceremonyType, isSubscribed }: Scri
               )}
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={handleCopyScript} className="hover:bg-amber-50 hover:border-amber-200">
-              <Copy className="h-4 w-4" />
-            </Button>
-            {isSubscribed && (
-              <>
-                <Button variant="outline" size="sm" onClick={handleDownload} className="hover:bg-amber-50 hover:border-amber-200">
-                  <Download className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" size="sm" className="hover:bg-amber-50 hover:border-amber-200">
-                  <Share2 className="h-4 w-4" />
-                </Button>
-              </>
-            )}
-          </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-4">
         <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-6 max-h-96 overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm text-gray-800 leading-relaxed font-serif">
             {script}
           </pre>
+        </div>
+        
+        <div className="border-t pt-4">
+          <h4 className="font-medium mb-3 text-gray-900">Export Options</h4>
+          <ScriptExporter 
+            script={script}
+            coupleNames={coupleNames}
+            ceremonyType={ceremonyType}
+          />
         </div>
         
         {!isSubscribed && (

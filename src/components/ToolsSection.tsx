@@ -1,151 +1,253 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Mic, Heart, MessageSquare, FileText, Calendar, Download } from 'lucide-react';
+import { Gavel, FileText, Award, MapPin, Clock, Users } from 'lucide-react';
+import FormsLibrary from './FormsLibrary';
+import CertificateGenerator from './CertificateGenerator';
 
 const ToolsSection = () => {
+  const [activeTab, setActiveTab] = useState('certificates');
+
   const tools = [
-    {
-      id: 'speech-tips',
-      title: 'Public Speaking Guide',
-      description: 'Tips for confident delivery, voice projection, and handling nerves',
-      icon: Mic,
-      color: 'amber',
-      features: ['Voice exercises', 'Pacing techniques', 'Microphone usage', 'Crowd engagement'],
-      available: true
-    },
-    {
-      id: 'emergency-prompts',
-      title: 'Emergency Script Prompts',
-      description: 'Quick phrases for when you blank out or need to improvise',
-      icon: MessageSquare,
-      color: 'orange',
-      features: ['Transitional phrases', 'Filler content', 'Recovery techniques', 'Backup vows'],
-      available: true
-    },
-    {
-      id: 'personalization',
-      title: 'AI Personalization Assistant',
-      description: 'Enhance your scripts with AI suggestions for tone and style',
-      icon: Heart,
-      color: 'amber',
-      features: ['Emotional tone', 'Humor injection', 'Length adjustment', 'Cultural adaptation'],
-      available: false
-    },
-    {
-      id: 'mobile-view',
-      title: 'Mobile Ceremony Flow',
-      description: 'Phone-friendly ceremony guide for easy altar reference',
-      icon: Calendar,
-      color: 'orange',
-      features: ['Large text', 'Swipe navigation', 'Bookmark sections', 'Offline access'],
-      available: true
-    },
-    {
-      id: 'templates',
-      title: 'Viral Toast Templates',
-      description: 'Popular and trending ceremony elements and social media content',
-      icon: FileText,
-      color: 'amber',
-      features: ['TikTok trends', 'Instagram captions', 'Memorable moments', 'Photo prompts'],
-      available: false
-    },
     {
       id: 'certificates',
       title: 'Certificate Generator',
-      description: 'Create beautiful marriage certificates and keepsake documents',
-      icon: Download,
-      color: 'orange',
-      features: ['Custom designs', 'Digital signatures', 'Print-ready PDF', 'Couple branding'],
-      available: true
+      description: 'Generate official marriage and officiant certificates',
+      icon: Award,
+      badge: 'PDF Export'
+    },
+    {
+      id: 'forms',
+      title: 'Forms Library',
+      description: 'Access state-specific marriage forms and documents',
+      icon: FileText,
+      badge: 'State-Specific'
+    },
+    {
+      id: 'legal',
+      title: 'Legal Requirements',
+      description: 'State marriage laws and officiant requirements',
+      icon: Gavel,
+      badge: 'Legal Guide'
+    },
+    {
+      id: 'timeline',
+      title: 'Wedding Timeline',
+      description: 'Plan your ceremony schedule and timing',
+      icon: Clock,
+      badge: 'Planning Tool'
     }
   ];
 
-  const getIconColor = (color) => {
-    const colors = {
-      amber: 'text-amber-600',
-      orange: 'text-orange-600'
-    };
-    return colors[color] || 'text-gray-600';
-  };
-
-  const getBgColor = (color) => {
-    const colors = {
-      amber: 'bg-amber-100',
-      orange: 'bg-orange-100'
-    };
-    return colors[color] || 'bg-gray-100';
-  };
-
   return (
-    <section id="tools" className="py-16 bg-gray-50">
+    <section className="py-16 bg-gradient-to-br from-amber-50 to-orange-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Professional Tools & Resources</h2>
-          <p className="text-lg text-gray-600">Everything you need to officiate with confidence</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Professional Wedding Officiant Tools</h2>
+          <p className="text-lg text-gray-600">Complete toolkit for wedding officiants with PDF generation and legal resources</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {tools.map((tool) => {
-            const IconComponent = tool.icon;
-            return (
-              <Card key={tool.id} className={`relative ${!tool.available ? 'opacity-75' : ''}`}>
-                {!tool.available && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <Badge variant="secondary" className="bg-amber-100 text-amber-800">
-                      Coming Soon
-                    </Badge>
-                  </div>
-                )}
-                
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-4 mb-8">
+            {tools.map((tool) => {
+              const IconComponent = tool.icon;
+              return (
+                <TabsTrigger key={tool.id} value={tool.id} className="flex flex-col items-center gap-2 p-4">
+                  <IconComponent className="h-5 w-5" />
+                  <span className="text-sm font-medium">{tool.title}</span>
+                  <Badge variant="secondary" className="text-xs">{tool.badge}</Badge>
+                </TabsTrigger>
+              );
+            })}
+          </TabsList>
+
+          <TabsContent value="certificates" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Award className="h-6 w-6 text-amber-600" />
+                  Certificate Generator
+                </CardTitle>
+                <CardDescription>
+                  Generate professional marriage certificates and officiant credentials with PDF export
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CertificateGenerator />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="forms" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-6 w-6 text-amber-600" />
+                  Official Forms Library
+                </CardTitle>
+                <CardDescription>
+                  Access state-specific marriage license forms and required documentation
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <FormsLibrary />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="legal" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card className="hover:shadow-md transition-shadow">
                 <CardHeader>
-                  <div className={`w-12 h-12 ${getBgColor(tool.color)} rounded-lg flex items-center justify-center mb-3`}>
-                    <IconComponent className={`h-6 w-6 ${getIconColor(tool.color)}`} />
-                  </div>
-                  <CardTitle className="text-lg">{tool.title}</CardTitle>
-                  <CardDescription>{tool.description}</CardDescription>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <Gavel className="h-5 w-5 text-amber-600" />
+                    Marriage Laws
+                  </CardTitle>
                 </CardHeader>
-                
                 <CardContent>
-                  <div className="space-y-3 mb-6">
-                    {tool.features.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <div className={`w-2 h-2 ${getBgColor(tool.color)} rounded-full`}></div>
-                        <span className="text-sm text-gray-600">{feature}</span>
-                      </div>
-                    ))}
+                  <p className="text-gray-600 mb-4">State-specific marriage requirements and regulations</p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Age Requirements:</span>
+                      <span className="font-medium">18+ (varies by state)</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span>Waiting Period:</span>
+                      <span className="font-medium">0-30 days</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span>License Validity:</span>
+                      <span className="font-medium">30-365 days</span>
+                    </div>
                   </div>
-                  
-                  <Button 
-                    className="w-full" 
-                    variant={tool.available ? "default" : "outline"}
-                    disabled={!tool.available}
-                  >
-                    {tool.available ? 'Access Tool' : 'Notify When Ready'}
-                  </Button>
                 </CardContent>
               </Card>
-            );
-          })}
-        </div>
 
-        <div className="mt-12 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Officiate Your First Wedding?</h3>
-          <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
-            Join thousands of officiants who trust our toolkit for their most important ceremonies. 
-            Start creating memorable moments today.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-amber-600 hover:bg-amber-700 px-8">
-              Start Free Trial
-            </Button>
-            <Button variant="outline" size="lg" className="px-8 hover:bg-amber-50 hover:border-amber-200">
-              View Pricing
-            </Button>
-          </div>
-        </div>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <Users className="h-5 w-5 text-amber-600" />
+                    Officiant Requirements
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">Who can legally perform marriages</p>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>Licensed Ministers</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>Judges & Justices</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>Notary Public (some states)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                      <span>Online Ordained Ministers</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-md transition-shadow">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <MapPin className="h-5 w-5 text-amber-600" />
+                    State Variations
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">Important state-specific differences</p>
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <span className="font-medium">California:</span>
+                      <span className="text-gray-600"> No residency requirement</span>
+                    </div>
+                    <div>
+                      <span className="font-medium">Texas:</span>
+                      <span className="text-gray-600"> 72-hour waiting period</span>
+                    </div>
+                    <div>
+                      <span className="font-medium">New York:</span>
+                      <span className="text-gray-600"> 24-hour waiting period</span>
+                    </div>
+                    <div>
+                      <span className="font-medium">Florida:</span>
+                      <span className="text-gray-600"> 3-day waiting period</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="timeline" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Clock className="h-6 w-6 text-amber-600" />
+                  Wedding Ceremony Timeline Planner
+                </CardTitle>
+                <CardDescription>
+                  Plan the perfect ceremony timing and schedule
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg">Pre-Ceremony (30 minutes)</h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center p-2 bg-amber-50 rounded">
+                        <span>Guest seating begins</span>
+                        <span className="text-sm text-gray-600">-30 min</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 bg-amber-50 rounded">
+                        <span>Family seating</span>
+                        <span className="text-sm text-gray-600">-15 min</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 bg-amber-50 rounded">
+                        <span>Processional music begins</span>
+                        <span className="text-sm text-gray-600">-5 min</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg">Ceremony (20-30 minutes)</h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
+                        <span>Processional</span>
+                        <span className="text-sm text-gray-600">3-5 min</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
+                        <span>Opening & vows</span>
+                        <span className="text-sm text-gray-600">10-15 min</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
+                        <span>Ring exchange</span>
+                        <span className="text-sm text-gray-600">3-5 min</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
+                        <span>Pronouncement & kiss</span>
+                        <span className="text-sm text-gray-600">2-3 min</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
+                        <span>Recessional</span>
+                        <span className="text-sm text-gray-600">2-3 min</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
   );
