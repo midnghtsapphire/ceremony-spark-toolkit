@@ -25,7 +25,7 @@ interface OnboardingData {
 const Index = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [userPreferences, setUserPreferences] = useState<OnboardingData | null>(null);
-  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
+  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(true); // Default to true to show main page
   const [loading, setLoading] = useState(true);
   const { user, subscribed, loading: authLoading } = useAuth();
   const { toast } = useToast();
@@ -74,6 +74,10 @@ const Index = () => {
   useEffect(() => {
     const initializeApp = () => {
       try {
+        // Clear onboarding state to show main page
+        localStorage.removeItem('onboarding_completed');
+        localStorage.removeItem('user_preferences');
+        
         const completedOnboarding = localStorage.getItem('onboarding_completed') === 'true';
         const savedPreferences = localStorage.getItem('user_preferences');
         
@@ -84,12 +88,16 @@ const Index = () => {
           setUserPreferences(preferences);
           setHasCompletedOnboarding(true);
           console.log('Loaded saved preferences:', preferences);
+        } else {
+          // Show main page by default for testing
+          setHasCompletedOnboarding(true);
         }
       } catch (error) {
         console.error('Error initializing app:', error);
-        // Clear invalid data
+        // Clear invalid data and show main page
         localStorage.removeItem('onboarding_completed');
         localStorage.removeItem('user_preferences');
+        setHasCompletedOnboarding(true);
       } finally {
         setLoading(false);
       }
@@ -105,8 +113,10 @@ const Index = () => {
     return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
   }
 
-  // Show onboarding if user is authenticated and hasn't completed it
-  const shouldShowOnboarding = user && !hasCompletedOnboarding;
+  // For testing - always show main page first
+  // Comment: Temporarily disabled onboarding to test main page
+  // const shouldShowOnboarding = user && !hasCompletedOnboarding;
+  const shouldShowOnboarding = false;
 
   console.log('Rendering Index - shouldShowOnboarding:', shouldShowOnboarding, 'user:', !!user, 'hasCompletedOnboarding:', hasCompletedOnboarding);
 
