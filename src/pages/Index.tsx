@@ -23,10 +23,10 @@ interface OnboardingData {
 }
 
 const Index = () => {
-  const [showOnboarding, setShowOnboarding] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [userPreferences, setUserPreferences] = useState<OnboardingData | null>(null);
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   const { user, subscribed, loading } = useAuth();
   const { toast } = useToast();
 
@@ -34,7 +34,6 @@ const Index = () => {
     console.log('Onboarding completed with data:', data);
     setUserPreferences(data);
     setHasCompletedOnboarding(true);
-    setShowOnboarding(false);
     // Store in localStorage to persist across sessions
     localStorage.setItem('onboarding_completed', 'true');
     localStorage.setItem('user_preferences', JSON.stringify(data));
@@ -61,16 +60,19 @@ const Index = () => {
     }
   }, [toast]);
 
-  // Load persisted onboarding state on mount
+  // Initialize onboarding state once on mount
   useEffect(() => {
     const completedOnboarding = localStorage.getItem('onboarding_completed') === 'true';
     const savedPreferences = localStorage.getItem('user_preferences');
+    
+    console.log('Initializing onboarding state - completedOnboarding:', completedOnboarding);
     
     if (completedOnboarding && savedPreferences) {
       try {
         const preferences = JSON.parse(savedPreferences);
         setUserPreferences(preferences);
         setHasCompletedOnboarding(true);
+        console.log('Loaded saved preferences:', preferences);
       } catch (error) {
         console.error('Error parsing saved preferences:', error);
         // Clear invalid data
@@ -78,34 +80,22 @@ const Index = () => {
         localStorage.removeItem('user_preferences');
       }
     }
+    
+    setIsInitialized(true);
   }, []);
 
-  // Show onboarding for authenticated users who haven't completed it
-  useEffect(() => {
-    console.log('Auth state check - loading:', loading, 'user:', !!user, 'hasCompletedOnboarding:', hasCompletedOnboarding);
-    if (!loading && user && !hasCompletedOnboarding) {
-      console.log('Setting showOnboarding to true for user:', user.email);
-      setShowOnboarding(true);
-    } else {
-      console.log('Not showing onboarding - conditions not met');
-      setShowOnboarding(false);
-    }
-  }, [user, hasCompletedOnboarding, loading]);
-
-  // Additional debug logging for showOnboarding state
-  useEffect(() => {
-    console.log('showOnboarding state changed to:', showOnboarding);
-  }, [showOnboarding]);
-
-  if (loading) {
+  if (loading || !isInitialized) {
     return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
   }
 
-  console.log('Rendering Index - showOnboarding:', showOnboarding, 'user:', !!user, 'hasCompletedOnboarding:', hasCompletedOnboarding);
+  // Determine if we should show onboarding
+  const shouldShowOnboarding = user && !hasCompletedOnboarding;
+
+  console.log('Rendering Index - shouldShowOnboarding:', shouldShowOnboarding, 'user:', !!user, 'hasCompletedOnboarding:', hasCompletedOnboarding);
 
   return (
     <div className="min-h-screen bg-white">
-      {showOnboarding && user && !hasCompletedOnboarding ? (
+      {shouldShowOnboarding ? (
         <OnboardingQuiz onComplete={handleOnboardingComplete} />
       ) : (
         <>
