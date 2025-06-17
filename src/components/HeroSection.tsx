@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Heart, Users, Award } from 'lucide-react';
@@ -11,12 +12,12 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
   const { user } = useAuth();
 
   return (
-    <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+    <section className="bg-gradient-to-br from-amber-50 to-orange-100 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             EverUnity Church
-            <span className="text-blue-600"> Professional Wedding Officiant AI Assistant</span>
+            <span className="text-amber-700"> Professional Wedding Officiant AI Assistant</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             The complete AI-powered marriage officiant platform with intelligent wedding ceremony scripts, 
@@ -45,17 +46,17 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="flex flex-col items-center">
-              <Heart className="h-12 w-12 text-blue-600 mb-4" />
+              <Heart className="h-12 w-12 text-amber-700 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900">Personalized Wedding Scripts</h3>
               <p className="text-gray-600 text-center">AI-generated marriage ceremony scripts tailored for every couple and officiant style</p>
             </div>
             <div className="flex flex-col items-center">
-              <Users className="h-12 w-12 text-blue-600 mb-4" />
+              <Users className="h-12 w-12 text-amber-700 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900">Marriage License Guidance</h3>
               <p className="text-gray-600 text-center">State-specific marriage requirements, legal documentation, and officiant regulations</p>
             </div>
             <div className="flex flex-col items-center">
-              <Award className="h-12 w-12 text-blue-600 mb-4" />
+              <Award className="h-12 w-12 text-amber-700 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900">Officiant Certification</h3>
               <p className="text-gray-600 text-center">Professional wedding officiant tools, certificates, and ceremony planning resources</p>
             </div>
