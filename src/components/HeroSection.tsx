@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Heart, Users, Award, X } from 'lucide-react';
@@ -31,7 +30,7 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
               <img 
                 src="/lovable-uploads/35d2b96f-0f92-478c-9568-d5c31acb116c.png" 
                 alt="EverUnity Church Logo" 
-                className="h-20 w-auto mx-auto cursor-pointer hover:scale-105 transition-transform"
+                className="h-32 md:h-40 w-auto mx-auto cursor-pointer hover:scale-105 transition-transform"
                 onClick={handleLogoClick}
               />
             </div>
