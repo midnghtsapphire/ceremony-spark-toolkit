@@ -169,14 +169,34 @@ const ReviewsSection = () => {
           </div>
         </div>
 
-        {/* Featured in Section */}
+        {/* Featured in Section - Fixed */}
         <div className="mt-16 text-center">
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Featured In</h3>
-          <div className="flex justify-center items-center space-x-12 opacity-60">
-            <div className="text-lg font-bold text-gray-500">The Knot</div>
-            <div className="text-lg font-bold text-gray-500">WeddingWire</div>
-            <div className="text-lg font-bold text-gray-500">Brides Magazine</div>
-            <div className="text-lg font-bold text-gray-500">Wedding Industry News</div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-8">Featured In</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="flex flex-col items-center p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-br from-pink-100 to-pink-200 rounded-lg flex items-center justify-center mb-3">
+                <span className="text-2xl font-bold text-pink-600">💍</span>
+              </div>
+              <div className="text-sm font-semibold text-gray-700">The Knot</div>
+            </div>
+            <div className="flex flex-col items-center p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center mb-3">
+                <span className="text-2xl font-bold text-purple-600">💒</span>
+              </div>
+              <div className="text-sm font-semibold text-gray-700">WeddingWire</div>
+            </div>
+            <div className="flex flex-col items-center p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg flex items-center justify-center mb-3">
+                <span className="text-2xl font-bold text-amber-600">💐</span>
+              </div>
+              <div className="text-sm font-semibold text-gray-700">Brides Magazine</div>
+            </div>
+            <div className="flex flex-col items-center p-4 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mb-3">
+                <span className="text-2xl font-bold text-orange-600">📰</span>
+              </div>
+              <div className="text-sm font-semibold text-gray-700">Wedding Industry News</div>
+            </div>
           </div>
         </div>
       </div>
