@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Heart, Users, Award } from 'lucide-react';
@@ -15,6 +14,15 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
     <section className="bg-gradient-to-br from-amber-50 to-orange-100 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
+          {/* EverUnity Logo */}
+          <div className="mb-8">
+            <img 
+              src="/lovable-uploads/35d2b96f-0f92-478c-9568-d5c31acb116c.png" 
+              alt="EverUnity Church Logo" 
+              className="h-20 w-auto mx-auto"
+            />
+          </div>
+
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             EverUnity Church
             <br />
