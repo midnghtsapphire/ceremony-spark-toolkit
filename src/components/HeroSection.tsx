@@ -36,7 +36,7 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="text-xl md:text-2xl text-amber-700">WeddingOfficiantBot</span>
+              <span className="text-2xl md:text-4xl text-amber-700">WeddingOfficiantBot</span>
               <br />
               EverUnity Church
               <br />
