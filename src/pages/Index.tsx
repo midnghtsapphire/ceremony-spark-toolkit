@@ -9,7 +9,6 @@ import CeremonyChecklist from '@/components/CeremonyChecklist';
 import ToolsSection from '@/components/ToolsSection';
 import ReviewsSection from '@/components/ReviewsSection';
 import Footer from '@/components/Footer';
-import OnboardingQuiz from '@/components/OnboardingQuiz';
 import SubscriptionPlans from '@/components/SubscriptionPlans';
 import AuthModal from '@/components/AuthModal';
 import { useAuth } from '@/hooks/useAuth';
@@ -25,29 +24,8 @@ interface OnboardingData {
 const Index = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [userPreferences, setUserPreferences] = useState<OnboardingData | null>(null);
-  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const { user, subscribed, loading: authLoading } = useAuth();
+  const { user, subscribed } = useAuth();
   const { toast } = useToast();
-
-  const handleOnboardingComplete = (data: OnboardingData) => {
-    console.log('Onboarding completed with data:', data);
-    
-    // Store in localStorage first
-    localStorage.setItem('onboarding_completed', 'true');
-    localStorage.setItem('user_preferences', JSON.stringify(data));
-    
-    // Then update state
-    setUserPreferences(data);
-    setHasCompletedOnboarding(true);
-    
-    toast({
-      title: "Setup Complete!",
-      description: "Your officiant toolkit has been customized.",
-    });
-    
-    console.log('Onboarding state updated - hasCompletedOnboarding: true');
-  };
 
   // Check for success/canceled parameters
   useEffect(() => {
@@ -70,54 +48,20 @@ const Index = () => {
     }
   }, [toast]);
 
-  // Initialize onboarding state
+  // Load saved preferences if they exist
   useEffect(() => {
-    const initializeApp = () => {
-      try {
-        const completedOnboarding = localStorage.getItem('onboarding_completed') === 'true';
-        const savedPreferences = localStorage.getItem('user_preferences');
-        
-        console.log('Initializing app - completedOnboarding:', completedOnboarding);
-        
-        if (completedOnboarding && savedPreferences) {
-          const preferences = JSON.parse(savedPreferences);
-          setUserPreferences(preferences);
-          setHasCompletedOnboarding(true);
-          console.log('Loaded saved preferences:', preferences);
-        }
-      } catch (error) {
-        console.error('Error initializing app:', error);
-        // Clear invalid data
-        localStorage.removeItem('onboarding_completed');
-        localStorage.removeItem('user_preferences');
-      } finally {
-        setLoading(false);
+    try {
+      const savedPreferences = localStorage.getItem('user_preferences');
+      if (savedPreferences) {
+        const preferences = JSON.parse(savedPreferences);
+        setUserPreferences(preferences);
+        console.log('Loaded saved preferences:', preferences);
       }
-    };
-
-    // Wait for auth to be ready
-    if (!authLoading) {
-      initializeApp();
+    } catch (error) {
+      console.error('Error loading preferences:', error);
+      localStorage.removeItem('user_preferences');
     }
-  }, [authLoading]);
-
-  if (authLoading || loading) {
-    return <div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>;
-  }
-
-  // Show onboarding if user is authenticated and hasn't completed it
-  const shouldShowOnboarding = user && !hasCompletedOnboarding;
-
-  console.log('Rendering Index - shouldShowOnboarding:', shouldShowOnboarding, 'user:', !!user, 'hasCompletedOnboarding:', hasCompletedOnboarding);
-
-  // Show onboarding quiz if conditions are met
-  if (shouldShowOnboarding) {
-    return (
-      <div className="min-h-screen bg-white">
-        <OnboardingQuiz onComplete={handleOnboardingComplete} />
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
