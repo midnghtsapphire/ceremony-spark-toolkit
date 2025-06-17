@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Shuffle, Sparkles } from 'lucide-react';
-import { getScriptVariations } from '@/utils/scriptVariations';
+import { scriptVariations } from '@/utils/scriptVariations';
 
 interface ScriptVariationSelectorProps {
   ceremonyType: string;
@@ -19,7 +19,7 @@ const ScriptVariationSelector = ({
   onVariationSelect, 
   onGenerateAnother 
 }: ScriptVariationSelectorProps) => {
-  const variations = getScriptVariations(ceremonyType);
+  const variations = scriptVariations[ceremonyType] || [];
 
   if (!variations || variations.length === 0) {
     return null;
