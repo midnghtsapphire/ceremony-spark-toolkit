@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Heart, Mail, MessageSquare } from 'lucide-react';
 
@@ -13,7 +12,7 @@ const Footer = () => {
                 <Heart className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">Officiantbot</h3>
+                <h3 className="text-xl font-bold">WeddingOfficiantBot</h3>
                 <p className="text-amber-200 text-sm">AI-Powered Wedding Officiant Assistant</p>
               </div>
             </div>
@@ -55,7 +54,7 @@ const Footer = () => {
         <div className="border-t border-amber-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col md:flex-row items-center gap-4">
             <p className="text-amber-200 text-sm">
-              © 2024 Officiantbot. All rights reserved.
+              © 2024 WeddingOfficiantBot. All rights reserved.
             </p>
             <p className="text-amber-300 text-sm">
               Powered by <span className="text-amber-100 font-medium">Glowstar Labs</span>
