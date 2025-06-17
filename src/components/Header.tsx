@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { User, LogOut, Settings } from 'lucide-react';
@@ -23,8 +22,16 @@ const Header = ({ onAuthClick }: HeaderProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700">
-              Officiantbot
+            <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+              <img 
+                src="/lovable-uploads/d7aa16b8-3a3c-4c5a-a68c-af9c8e8cd7c1.png" 
+                alt="EverUnity Church Logo" 
+                className="h-10 w-auto"
+              />
+              <div>
+                <div className="text-xl font-bold text-gray-900">EverUnity Church</div>
+                <div className="text-sm text-gray-600">Officiantbot</div>
+              </div>
             </Link>
             {subscribed && (
               <span className="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
