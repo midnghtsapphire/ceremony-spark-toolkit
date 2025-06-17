@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Heart, Users, Award, X } from 'lucide-react';
@@ -37,7 +36,7 @@ const HeroSection = ({ onAuthClick }: HeroSectionProps) => {
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              MarriageOfficiantBot
+              <span className="text-2xl md:text-3xl text-amber-700">MarriageOfficiantBot</span>
               <br />
               EverUnity Church
               <br />
