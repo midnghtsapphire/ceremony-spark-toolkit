@@ -91,7 +91,7 @@ const Header = ({ onAuthClick }: HeaderProps) => {
                       <LogOut className="h-4 w-4 mr-1" />
                       Sign Out
                     </Button>
-                    <span className="text-xs text-gray-500 mt-1">User logged in</span>
+                    <span className="text-xs text-gray-500 mt-1">{user.email}</span>
                   </div>
                 </div>
               ) : (
