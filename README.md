@@ -26,8 +26,10 @@ This repository ships a full front-to-back web product that includes:
    ```
 2. Run baseline checks:
    ```bash
-   npm run revvel:standards
+   npm test
    ```
+   `npm test` runs revvel-standards automation and then reports that no unit test suite is configured yet.  
+   You can also run `npm run revvel:standards` directly.
 3. Start local development:
    ```bash
    npm run dev
