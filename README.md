@@ -1,82 +1,88 @@
-# Welcome to your Lovable project
+# Ceremony Spark Toolkit
 
-## Project info
+Ceremony Spark Toolkit is a production-ready React + Supabase platform for officiants and ceremony businesses to create ceremony scripts, sell digital products, and manage subscription access.
 
-**URL**: https://lovable.dev/projects/75e93e17-5757-4882-ac1a-0e2ab26722cf
+## Website in Test (Vercel)
 
-## How can I edit this code?
+- **Test URL:** https://ceremony-spark-toolkit.vercel.app
+- **Deployment automation:** Vercel GitHub integration auto-deploys pushes to the main branch and creates preview deployments for pull requests.
 
-There are several ways of editing your application.
+## What this repository does
 
-**Use Lovable**
+This repository ships a full front-to-back web product that includes:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/75e93e17-5757-4882-ac1a-0e2ab26722cf) and start prompting.
+- Public marketing surface (home, feature sections, pricing, reviews)
+- User login/signup and authenticated subscription state
+- Stripe-backed checkout and customer portal via Supabase Edge Functions
+- Product catalog with cart CTAs and featured filtering/search
+- Admin route and dashboard gatekeeping
+- Ceremony generation utilities (script generator, legal guide, checklists, templates)
 
-Changes made via Lovable will be committed automatically to this repo.
+## How to use it now
 
-**Use your preferred IDE**
+1. Install dependencies:
+   ```bash
+   npm ci
+   ```
+2. Run baseline checks:
+   ```bash
+   npm test
+   ```
+   `npm test` runs revvel-standards automation plus baseline test validation.
+   Use `npm run revvel:standards` when you want only the revvel standards automation checks.
+3. Start local development:
+   ```bash
+   npm run dev
+   ```
+4. Build for production:
+   ```bash
+   npm run build
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Required environment variables
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+For Supabase + Stripe flows, configure:
 
-Follow these steps:
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `SUPABASE_URL` (edge functions)
+- `SUPABASE_ANON_KEY` (edge functions)
+- `SUPABASE_SERVICE_ROLE_KEY` (edge functions)
+- `STRIPE_SECRET_KEY` (edge functions)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+See `/DEPLOYMENT_GUIDE.md` for step-by-step production setup.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Value analysis and 3-year outcome framing
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Why this project matters
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Ceremony Spark Toolkit compresses planning/admin workload for officiants while creating recurring subscription + digital-product revenue. It is valuable because it combines workflow tooling and monetization in one system instead of separate disconnected tools.
 
-**Edit a file directly in GitHub**
+### Priority within portfolio goals
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- **Primary value:** recurring SaaS subscriptions + add-on product sales
+- **Secondary value:** reusable infrastructure (auth, Stripe, admin, catalog) for additional niche service products
+- **Strategic value:** improves time-to-market for future verticalized creator/service platforms
 
-**Use GitHub Codespaces**
+### Revenue projection (assumption-based)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Assumptions:
+- 3,000 active subscribers by year 3
+- $29 blended monthly ARPU
+- 20% of subscribers purchase an average of $12/month in product add-ons
 
-## What technologies are used for this project?
+Projection:
+- Subscription ARR: `3,000 x $29 x 12 = $1,044,000`
+- Add-on ARR: `3,000 x 20% x $12 x 12 = $86,400`
+- **Total year-3 run-rate:** **$1.13M ARR**
 
-This project is built with:
+## Documentation map (revvel-standards)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/75e93e17-5757-4882-ac1a-0e2ab26722cf) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-
----
-
-## Test
-
-| Feature | Status |
-|---------|--------|
-| Feature | ✅ Ready |
-
+- `README.md` — product overview + quickstart + value framing
+- `CHANGELOG.md` — release history
+- `DEPLOYMENT_GUIDE.md` — production deployment instructions
+- `GO_TO_MARKET.md` — market research and launch plan
+- `BRAND_GUIDELINES.md` — brand system and messaging
+- `SECURITY.md` — security policy and controls
+- `scripts/test-baseline.js` + `scripts/build-baseline.js` — baseline validation scripts
+- `scripts/revvel-standards-automation.js` — revvel-standards automation entrypoint used by `npm test` and `npm run revvel:standards`
