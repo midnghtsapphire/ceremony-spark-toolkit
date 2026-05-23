@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "npm run revvel:standards",
+    "test": "npm run revvel:standards && node scripts/test-baseline.js",
     "revvel:standards": "node scripts/revvel-standards-automation.js"
   },
   "dependencies": {

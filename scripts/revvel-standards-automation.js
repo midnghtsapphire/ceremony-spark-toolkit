@@ -38,16 +38,16 @@ if (!packageJson.scripts?.test) {
 
 const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
 const requiredReadmeMarkers = [
-  /##\s*website in test\s*\(vercel\)/i,
-  /deployment automation/i,
-  /##\s*what this repository does/i,
-  /##\s*value analysis and 3-year outcome framing/i,
+  { label: 'Website in Test (Vercel)', pattern: /##\s*website in test\s*\(vercel\)/i },
+  { label: 'Deployment automation', pattern: /deployment automation/i },
+  { label: 'What this repository does', pattern: /##\s*what this repository does/i },
+  { label: 'Value analysis and 3-year outcome framing', pattern: /##\s*value analysis and 3-year outcome framing/i },
 ];
 
-const missingMarkers = requiredReadmeMarkers.filter((marker) => !marker.test(readme));
+const missingMarkers = requiredReadmeMarkers.filter(({ pattern }) => !pattern.test(readme));
 if (missingMarkers.length > 0) {
   console.error('Revvel-standards automation failed. README.md is missing required sections:');
-  missingMarkers.forEach((marker) => console.error(`- ${marker.source}`));
+  missingMarkers.forEach(({ label }) => console.error(`- ${label}`));
   process.exit(1);
 }
 

@@ -28,8 +28,8 @@ This repository ships a full front-to-back web product that includes:
    ```bash
    npm test
    ```
-   `npm test` runs revvel-standards automation for CI/default validation.
-   Use `npm run revvel:standards` when you want to run only the revvel structure/compliance checks directly.
+   `npm test` runs revvel-standards automation plus baseline test validation.
+   Use `npm run revvel:standards` when you want only the revvel standards automation checks.
 3. Start local development:
    ```bash
    npm run dev
