@@ -19,6 +19,7 @@ const missingFiles = requiredFiles.filter((file) => !fs.existsSync(path.join(roo
 if (missingFiles.length > 0) {
   console.error('Revvel-standards automation failed. Missing files:');
   missingFiles.forEach((file) => console.error(`- ${file}`));
+  console.error('These files are required by revvel-standards automation.');
   process.exit(1);
 }
 
@@ -37,16 +38,16 @@ if (!packageJson.scripts?.test) {
 
 const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
 const requiredReadmeMarkers = [
-  '## Website in Test (Vercel)',
-  'Deployment automation',
-  '## What this repository does',
-  '## Value analysis and 3-year outcome framing',
+  /##\s*website in test\s*\(vercel\)/i,
+  /deployment automation/i,
+  /##\s*what this repository does/i,
+  /##\s*value analysis and 3-year outcome framing/i,
 ];
 
-const missingMarkers = requiredReadmeMarkers.filter((marker) => !readme.includes(marker));
+const missingMarkers = requiredReadmeMarkers.filter((marker) => !marker.test(readme));
 if (missingMarkers.length > 0) {
   console.error('Revvel-standards automation failed. README.md is missing required sections:');
-  missingMarkers.forEach((marker) => console.error(`- ${marker}`));
+  missingMarkers.forEach((marker) => console.error(`- ${marker.source}`));
   process.exit(1);
 }
 

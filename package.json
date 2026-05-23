@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "npm run revvel:standards && echo \"No project unit tests are configured yet.\"",
+    "test": "npm run revvel:standards",
     "revvel:standards": "node scripts/revvel-standards-automation.js"
   },
   "dependencies": {
