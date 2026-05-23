@@ -9,7 +9,8 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "node scripts/test-baseline.js"
+    "test": "node scripts/revvel-standards-automation.js",
+    "revvel:standards": "node scripts/revvel-standards-automation.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

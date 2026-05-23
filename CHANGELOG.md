@@ -14,3 +14,8 @@ All notable changes to this project are documented in this file.
   - scripts/test-baseline.js
   - scripts/build-baseline.js
 - npm `test` script for baseline repository validation.
+
+### Changed
+- Added `scripts/revvel-standards-automation.js` as a revvel automation entrypoint.
+- Wired `npm test` and `npm run revvel:standards` to the revvel automation script.
+- Updated README baseline check command to `npm run revvel:standards`.

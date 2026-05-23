@@ -26,7 +26,7 @@ This repository ships a full front-to-back web product that includes:
    ```
 2. Run baseline checks:
    ```bash
-   npm test
+   npm run revvel:standards
    ```
 3. Start local development:
    ```bash
@@ -83,3 +83,4 @@ Projection:
 - `BRAND_GUIDELINES.md` — brand system and messaging
 - `SECURITY.md` — security policy and controls
 - `scripts/test-baseline.js` + `scripts/build-baseline.js` — baseline validation scripts
+- `scripts/revvel-standards-automation.js` — revvel-standards automation entrypoint used by `npm test` and `npm run revvel:standards`
