@@ -42,6 +42,11 @@ const requiredReadmeSections = [
   { label: 'Deployment automation', pattern: /^\s*-\s*\*\*deployment automation:\*\*/im },
   { label: 'What this repository does', pattern: /##\s*what this repository does/i },
   { label: 'Value analysis and 3-year outcome framing', pattern: /##\s*value analysis and 3-year outcome framing/i },
+  { label: 'S2M research engine (one iteration)', pattern: /##\s*s2m research engine\s*\(one iteration\)/i },
+  { label: 'S2M suggestions executed', pattern: /##\s*s2m suggestions executed/i },
+  { label: 'Assets inventory', pattern: /##\s*assets inventory/i },
+  { label: 'Artifacts inventory', pattern: /##\s*artifacts inventory/i },
+  { label: 'Full website completion status', pattern: /##\s*full website completion status/i },
 ];
 
 const missingSections = requiredReadmeSections.filter(({ pattern }) => !pattern.test(readme));
