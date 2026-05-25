@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.1.1] - 2026-05-25
+### Changed
+- Expanded `README.md` with explicit S2M one-iteration sections for research engine, executed suggestions, assets inventory, artifacts inventory, and full website completion status.
+- Added GO_TO_MARKET traceability section linking research engine outputs to shipped assets/artifacts and route-level website implementation.
+- Updated `scripts/revvel-standards-automation.js` to enforce the new S2M research/assets/artifacts/full-website README sections.
+
 ## [0.1.0] - 2026-05-23
 ### Added
 - Revvel-standards baseline documentation set:

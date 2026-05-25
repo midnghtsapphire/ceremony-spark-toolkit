@@ -76,6 +76,43 @@ Projection:
 - Add-on ARR: `3,000 x 20% x $12 x 12 = $86,400`
 - **Total year-3 run-rate:** **$1.13M ARR**
 
+## S2M research engine (one iteration)
+
+- **Demand signals engine:** ceremony demand + planning behavior research from CDC and The Knot.
+- **Monetization engine:** Stripe subscription and billing workflow implementation references.
+- **Infrastructure engine:** Vercel + Supabase deployment architecture and release checks.
+- **Execution model:** all core website surfaces and implementation artifacts shipped in one iteration for this release.
+
+## S2M suggestions executed
+
+- Keep checkout and billing flows on Stripe-hosted surfaces for security and speed.
+- Use Vercel preview/production automation for rapid validation and deployment traceability.
+- Bundle workflow utility (scripts, legal guide, checklist) with subscription and product sales surfaces.
+
+## Assets inventory
+
+- Brand, positioning, and voice system: `/BRAND_GUIDELINES.md`
+- Launch and market research plan: `/GO_TO_MARKET.md`
+- Deployment and ops runbook: `/DEPLOYMENT_GUIDE.md`
+- Security controls baseline: `/SECURITY.md`
+- Application UI + logic assets: `/src/components`, `/src/pages`, `/src/hooks`, `/src/utils`
+
+## Artifacts inventory
+
+- Revvel standards automation: `/scripts/revvel-standards-automation.js`
+- Baseline test validation artifact: `/scripts/test-baseline.js`
+- Baseline build validation artifact: `/scripts/build-baseline.js`
+- Commerce backend artifacts: `/supabase/functions/*`, `/supabase/migrations/*`
+- Website routes and shipped surfaces:
+  - `/` home + generator + subscription + reviews
+  - `/products` product catalog + cart CTAs
+  - `/admin` role-gated admin dashboard
+  - auth modal + subscription state + Stripe checkout/portal flows
+
+## Full website completion status
+
+The front-to-back website surface for this repository is implemented and deployable through Vercel with Supabase + Stripe integration points wired in code and deployment documentation.
+
 ## Documentation map (revvel-standards)
 
 - `README.md` — product overview + quickstart + value framing

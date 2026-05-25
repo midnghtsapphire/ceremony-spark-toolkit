@@ -22,6 +22,18 @@ Ceremony Spark Toolkit advances portfolio goals by pairing recurring subscriptio
    - Stripe + hosted checkout/customer portal patterns accelerate secure monetization.
    - Source: https://docs.stripe.com/billing/subscriptions/checkout
 
+## Research engine outputs (one iteration)
+
+- **Engine 1: Market demand evidence** — validates ceremony/officiant demand continuity.
+- **Engine 2: Workflow opportunity evidence** — validates complexity that supports paid tooling.
+- **Engine 3: Monetization infrastructure evidence** — validates secure recurring billing implementation path.
+
+## Shipped assets and artifacts linkage
+
+- Assets: messaging, deployment, and security standards in `BRAND_GUIDELINES.md`, `DEPLOYMENT_GUIDE.md`, and `SECURITY.md`.
+- Artifacts: executable automation/validation scripts in `scripts/revvel-standards-automation.js`, `scripts/test-baseline.js`, `scripts/build-baseline.js`.
+- Website completion artifact: route-level implementation in `src/pages/Index.tsx`, `src/pages/Products.tsx`, and `src/pages/Admin.tsx`.
+
 ## ICP (ideal customer profile)
 
 - Solo officiants
