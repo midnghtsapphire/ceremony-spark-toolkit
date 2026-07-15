@@ -1,5 +1,9 @@
 # Ceremony Spark Toolkit
 
+
+<!-- AUTO-PACKAGE-BADGES:START -->
+
+<!-- AUTO-PACKAGE-BADGES:END -->
 Ceremony Spark Toolkit is a production-ready React + Supabase platform for officiants and ceremony businesses to create ceremony scripts, sell digital products, and manage subscription access.
 
 ## Website in Test (Vercel)
